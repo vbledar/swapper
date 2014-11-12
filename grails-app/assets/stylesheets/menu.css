@@ -1,0 +1,11 @@
+.flat-btn-group .btn-group .btn {
+    border-radius: 0px !important;
+}
+
+.flat-btn-group.btn-group .btn {
+    border-radius: 0px !important;
+}
+
+.flat-btn-group .btn.btn-primary.active {
+    color: darkorange !important;
+}

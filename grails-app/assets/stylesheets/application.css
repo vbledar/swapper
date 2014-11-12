@@ -1,0 +1,229 @@
+/*
+* This is a manifest file that'll be compiled into application.css, which will include all the files
+* listed below.
+*
+* Any CSS file within this directory can be referenced here using a relative path.
+*
+* You're free to add application-wide styles to this file and they'll appear at the top of the
+* compiled file, but it's generally better to create a new file per style scope.
+*
+*= require main
+*= require mobile
+*= require_self
+*= require bootstrap
+*= require photo-images
+*= require style.css
+*= require menu.css
+*= require jquery-colorbox-skin
+*/
+
+/**
+ * General containers.
+ */
+body {
+    width: 100% !important;
+    min-width: 100% !important;
+    background-color: #f5f5f5 !important;
+    padding-bottom: 100px;
+}
+
+.container_80 {
+    width: 80% !important;
+    min-width: 80% !important;
+    max-width: 80% !important;
+}
+
+.internal_container {
+    max-width: 1024px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.no-padding-no-margin {
+    padding: 0px !important;
+    margin: 0px !important;
+}
+
+/**
+ * Customized bootstrap
+ */
+.jumbotron {
+    width: 100% !important;
+    background-color: #596c89 !important;
+    padding-bottom: 5px !important;
+    margin-bottom: 0px !important;
+}
+
+.jumbotron h1,
+.jumbotron p {
+    color: rgb(49, 59, 75) !important;
+}
+
+.carousel-control.left {
+    background-image: none !important;
+    /*background-image: -webkit-linear-gradient(left, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.0001) 100%);*/
+    /*background-image: -o-linear-gradient(left, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.0001) 100%);*/
+    /*background-image: linear-gradient(to right, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.0001) 100%);*/
+    /*background-repeat: repeat-x;*/
+    /*filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#80000000', endColorstr='#00000000', GradientType=1);*/
+}
+.carousel-control.right {
+    left: auto;
+    right: 0;
+    background-image: none !important;
+    /*background-image: -webkit-linear-gradient(left, rgba(0, 0, 0, 0.0001) 0%, rgba(0, 0, 0, 0.5) 100%);*/
+    /*background-image: -o-linear-gradient(left, rgba(0, 0, 0, 0.0001) 0%, rgba(0, 0, 0, 0.5) 100%);*/
+    /*background-image: linear-gradient(to right, rgba(0, 0, 0, 0.0001) 0%, rgba(0, 0, 0, 0.5) 100%);*/
+    /*background-repeat: repeat-x;*/
+    /*filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00000000', endColorstr='#80000000', GradientType=1);*/
+}
+
+.carousel.carousel-hidden .carousel-control {
+    visibility: hidden !important;
+}
+
+.carousel.carousel-hidden:hover .carousel-control {
+    visibility: visible !important;
+}
+
+.modal-header {
+    background-color: rgb(49, 59, 75) !important;
+    color: darkorange !important;
+}
+
+.well.step-on {
+    background-color: rgb(49, 59, 75) !important;
+    color: darkorange !important;
+}
+
+.well.step-done {
+    background-color: #596c89 !important;
+    color: darkorange !important;
+}
+
+.well.step-not-yet {
+    background-color: #596c89 !important;
+    color: darkorange !important;
+}
+
+dl {
+    margin-bottom: 0px !important;
+}
+
+ul {
+    list-style-type: none;
+}
+div.color-selection-attribute label:hover,
+div.color-selection-attribute ul.product-color-pop li:hover {
+    background-color: rgb(255, 225, 163);
+    cursor: pointer;
+}
+
+div.color-selection-attribute ul.product-color-pop li {
+    background-color: white;
+}
+
+div.color-selection-attribute label.active,
+div.color-selection-attribute ul.product-color-pop li.active {
+    background-color: rgb(49, 59, 75) !important;
+    color: darkorange !important;
+
+}
+
+div.color-selection-attribute ul.product-color-pop li.active a {
+    border-left: black 1px solid;
+    border-right: black 1px solid;
+    border-bottom: black 1px solid;
+    border-top:  black 1px solid;
+}
+
+.color-attribute-item-selection div:hover {
+    border-bottom-color: rgb(255, 165, 0);
+    border-top-color: rgb(255, 165, 0);
+    border-left-color: rgb(255, 165, 0);
+    border-right-color: rgb(255, 165, 0);
+}
+
+.product-color-pop{
+    min-height:30px;
+    width:100%;
+}
+.product-color-pop li{
+    float:left;
+    width:30px;
+    height:30px;
+    border-top:1px solid #c4c4c4;
+    border-left:1px solid #c4c4c4;
+    border-bottom:1px solid #c4c4c4;
+}
+.product-color-pop li:LAST-CHILD {
+    float:left;
+    width:30px;
+    height:30px;
+    border-top:1px solid #c4c4c4;
+    border-left:1px solid #c4c4c4;
+    border-right:1px solid #c4c4c4;
+    border-bottom:1px solid #c4c4c4;
+}
+.color{
+    width:20px;
+    height:20px;
+    margin:5px;
+    display:block;
+    position:relative;
+}
+.color span{
+    display:none;
+    position:absolute;
+    top:30px;
+    left:0px;
+    color:#fff;
+    background-color:#000000;
+    font-size:0.8em;
+    padding:5px;
+}
+.color span img{
+    position:absolute;
+    top:-3px;
+    left:10px;
+}
+.color:hover span{
+    display:block;
+}
+
+.color-attribute-multi {
+    background: rgb(243,197,189); /* Old browsers */
+    background: -moz-linear-gradient(top,  rgba(243,197,189,1) 0%, rgba(234,40,3,1) 6%, rgba(234,40,3,1) 6%, rgba(232,108,87,1) 14%, rgba(53,229,0,1) 24%, rgba(199,34,0,1) 40%, rgba(0,67,201,1) 49%, rgba(20,43,0,1) 60%, rgba(232,232,0,1) 71%, rgba(122,0,63,1) 81%, rgba(179,0,196,1) 90%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(243,197,189,1)), color-stop(6%,rgba(234,40,3,1)), color-stop(6%,rgba(234,40,3,1)), color-stop(14%,rgba(232,108,87,1)), color-stop(24%,rgba(53,229,0,1)), color-stop(40%,rgba(199,34,0,1)), color-stop(49%,rgba(0,67,201,1)), color-stop(60%,rgba(20,43,0,1)), color-stop(71%,rgba(232,232,0,1)), color-stop(81%,rgba(122,0,63,1)), color-stop(90%,rgba(179,0,196,1))); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  rgba(243,197,189,1) 0%,rgba(234,40,3,1) 6%,rgba(234,40,3,1) 6%,rgba(232,108,87,1) 14%,rgba(53,229,0,1) 24%,rgba(199,34,0,1) 40%,rgba(0,67,201,1) 49%,rgba(20,43,0,1) 60%,rgba(232,232,0,1) 71%,rgba(122,0,63,1) 81%,rgba(179,0,196,1) 90%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  rgba(243,197,189,1) 0%,rgba(234,40,3,1) 6%,rgba(234,40,3,1) 6%,rgba(232,108,87,1) 14%,rgba(53,229,0,1) 24%,rgba(199,34,0,1) 40%,rgba(0,67,201,1) 49%,rgba(20,43,0,1) 60%,rgba(232,232,0,1) 71%,rgba(122,0,63,1) 81%,rgba(179,0,196,1) 90%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  rgba(243,197,189,1) 0%,rgba(234,40,3,1) 6%,rgba(234,40,3,1) 6%,rgba(232,108,87,1) 14%,rgba(53,229,0,1) 24%,rgba(199,34,0,1) 40%,rgba(0,67,201,1) 49%,rgba(20,43,0,1) 60%,rgba(232,232,0,1) 71%,rgba(122,0,63,1) 81%,rgba(179,0,196,1) 90%); /* IE10+ */
+    background: linear-gradient(to bottom,  rgba(243,197,189,1) 0%,rgba(234,40,3,1) 6%,rgba(234,40,3,1) 6%,rgba(232,108,87,1) 14%,rgba(53,229,0,1) 24%,rgba(199,34,0,1) 40%,rgba(0,67,201,1) 49%,rgba(20,43,0,1) 60%,rgba(232,232,0,1) 71%,rgba(122,0,63,1) 81%,rgba(179,0,196,1) 90%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f3c5bd', endColorstr='#b300c4',GradientType=0 ); /* IE6-9 */
+}
+
+/*
+ * Spacers
+ */
+
+.spacer5 {
+    clear: both;
+    height: 5px;
+}
+
+.spacer10 {
+    clear: both;
+    height: 10px;
+}
+
+.spacer30 {
+    clear: both;
+    height: 30px;
+}
+
+div.divider {
+    height: 1px;
+    margin: 0 10px;
+    clear: both;
+    border-bottom: 1px dotted #c9c6bf;
+}

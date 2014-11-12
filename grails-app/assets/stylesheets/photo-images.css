@@ -1,0 +1,64 @@
+/**
+ * Image Sizes
+ */
+.image-max-180-180 {
+    max-width: 180px;
+    max-height: 180px;
+}
+
+.image-max-25-25 {
+    max-width: 25px;
+    max-height: 25px;
+}
+
+.carousel-selector {
+    cursor: pointer;
+}
+
+
+.image-list-pop li{
+    margin:10px 10px 30px 10px;
+    float:left;
+    height:180px;
+    border:1px solid #ccc;
+    overflow:hidden;
+}
+.image-show{
+    width:150px;
+    height:150px;
+    position:relative;
+    background:url("../images/camera.png") no-repeat center center;
+}
+
+.image-show-with-spinner {
+    width:150px;
+    height:150px;
+    position:relative;
+    background:url("../images/spinner.gif") no-repeat center center !important;
+}
+
+.image-show span{
+    position:absolute;
+    top:15px;
+    left:15px;
+    color:#ccc;
+}
+
+.image-show-loading {
+    width:150px;
+    height:150px;
+    position:relative;
+    background:url("../images/image-uploading-spinner.gif") no-repeat center center;
+}
+
+.image-show-loading span{
+    position:absolute;
+    top:15px;
+    left:15px;
+    color:#ccc;
+}
+
+.thumbnail.dreaded {
+    background-color: #596c89 !important;
+    border: 1px dashed darkorange;
+}
