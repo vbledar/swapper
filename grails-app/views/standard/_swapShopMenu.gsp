@@ -1,12 +1,12 @@
 <div class="btn-group flat-btn-group btn-group-justified">
     <div class="btn-group">
-        <button type="button" class="btn btn-lg btn-primary ${controllerName.equalsIgnoreCase("swapShop") && actionName.equalsIgnoreCase("swapShop") ? 'active' : ''}">
+        <g:link controller="swapShop" action="swapShop" class="btn btn-lg btn-primary ${controllerName.equalsIgnoreCase("swapShop") && (actionName.equalsIgnoreCase("swapShop") || actionName.equalsIgnoreCase("viewItem")) ? 'active' : ''}">
             <span class="glyphicon glyphicon-th-large"></span>
             <span class="hidden-xs">
                 <span class="visible-xs visible-sm"><br/></span>
                 <g:message code="swap.shop.menu.items"/>
             </span>
-        </button>
+        </g:link>
     </div>
     <div class="btn-group">
         <button type="button" class="btn btn-lg btn-primary ${controllerName.equalsIgnoreCase("swapShop") && actionName.equalsIgnoreCase("receivedRequests") ? 'active' : ''}">

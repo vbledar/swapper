@@ -54,7 +54,21 @@ class ItemService {
         }
 
         // TODO apply quality check on user
-        // TODO apply item shipping information
+
+        // create item shipping instance
+        ItemShipping itemShipping = new ItemShipping(shippingInfo: itemShippingCommand.shippingInfo,
+                shippingCosts: itemShippingCommand.shippingCosts,
+                noCosts: itemShippingCommand.noCosts,
+                item: item)
+        item.itemShipping = itemShipping
+
+        if (!itemShipping.save()) {
+            log.error "Failed to create item shipping instance."
+            itemShipping.errors.each {
+                log.error it
+            }
+            throw new PersistException(entity: itemShipping)
+        }
 
         // apply item attributes
         updateItemAttributes(item,createCommand.attrs)

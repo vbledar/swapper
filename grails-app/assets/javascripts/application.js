@@ -204,18 +204,16 @@ function submitInformation(url, parameters, success, failure) {
     });
 
     posting.done(function(data) {
-        if (data.success === 'false') {
+        if (data.success === false) {
             failure(data);
             return;
         }
-
-        console.log(success);
         success(data);
     });
 
     posting.fail(function(data) {
         var parameters = [];
-        parameters.success = 'false'
+        parameters.success = false
         parameters.message = "Communication failure."
         failure(parameters);
     });

@@ -1,8 +1,8 @@
 <blockquote>
     <label class="text-muted"><g:message code="form.field.name"/></label>
     <g:textField name="name"
-                 class="form-control ${hasErrors(bean: itemInstance, field: 'name', 'alert alert-danger')}"
-                 value="${itemInstance?.name}"
+                 class="form-control ${hasErrors(bean: item, field: 'name', 'alert alert-danger')}"
+                 value="${item?.name}"
                  required=""
                  placeholder="${message(code: 'form.field.input.placeholder.item.name')}"/>
 </blockquote>
@@ -15,8 +15,8 @@
               optionValue="name"
               optionKey="id"
               required=""
-              value="${itemInstance?.category?.parent?.id}"
-              class="many-to-one form-control ${hasErrors(bean: itemInstance, field: 'category', 'alert alert-danger')}"
+              value="${item?.category?.parent?.id}"
+              class="many-to-one form-control ${hasErrors(bean: item, field: 'category', 'alert alert-danger')}"
               noSelection="['':message(code: 'form.field.input.choose.category')]"/>
 </blockquote>
 
@@ -29,8 +29,8 @@
                   optionValue="name"
                   optionKey="id"
                   required=""
-                  value="${itemInstance?.category?.id}"
-                  class="many-to-one form-control ${hasErrors(bean: itemInstance, field: 'category', 'alert alert-danger')}"
+                  value="${item?.category?.id}"
+                  class="many-to-one form-control ${hasErrors(bean: item, field: 'category', 'alert alert-danger')}"
                   noSelection="['':message(code: 'form.field.input.choose.subcategory')]"/>
     </span>
 </blockquote>
@@ -38,23 +38,23 @@
 <blockquote>
     <label class="text-muted"><g:message code="form.field.description"/></label>
     <g:textArea name="description"
-                class="form-control ${hasErrors(bean: itemInstance, field: 'description', 'alert alert-danger')}"
+                class="form-control ${hasErrors(bean: item, field: 'description', 'alert alert-danger')}"
                 cols="60"
                 rows="4"
                 maxlength="2000"
                 required=""
-                value="${itemInstance?.description}"
+                value="${item?.description}"
                 placeholder="${message(code: 'form.field.input.enter.description')}"/>
 </blockquote>
 
 <blockquote>
     <label class="text-muted"><g:message code="form.field.designer"/></label>
     <g:textArea name="designer"
-                class="form-control ${hasErrors(bean: itemInstance, field: 'designer', 'alert alert-danger')}"
+                class="form-control ${hasErrors(bean: item, field: 'designer', 'alert alert-danger')}"
                 cols="80"
                 rows="3"
                 maxlength="2000"
-                value="${itemInstance?.designer}"
+                value="${item?.designer}"
                 placeholder="${message(code: 'form.field.input.enter.designer.info')}"/>
 </blockquote>
 
@@ -65,9 +65,9 @@
               from="${com.swapper.enums.item.ItemConditionType.values()*.description}"
               keys="${com.swapper.enums.item.ItemConditionType.values()*.name()}"
               required=""
-              value="${itemInstance?.itemConditionType?.name()}"
+              value="${item?.itemConditionType?.name()}"
               noSelection="['':message(code: 'form.field.input.condition.type')]"
-              class="many-to-one form-control ${hasErrors(bean: itemInstance, field: 'itemConditionType', 'alert alert-danger')}" />
+              class="many-to-one form-control ${hasErrors(bean: item, field: 'itemConditionType', 'alert alert-danger')}" />
 </blockquote>
 
 <blockquote>
@@ -78,8 +78,8 @@
               keys="${com.swapper.enums.item.ItemExchangeType.values()*.name()}"
               required=""
               noSelection="['':message(code: 'form.field.input.exchange.type')]"
-              value="${ itemInstance?.itemExchangeType?.name() }"
-              class="many-to-one form-control ${hasErrors(bean: itemInstance, field: 'itemExchangeType', 'alert alert-danger')}"/>
+              value="${ item?.itemExchangeType?.name() }"
+              class="many-to-one form-control ${hasErrors(bean: item, field: 'itemExchangeType', 'alert alert-danger')}"/>
 </blockquote>
 
 <div id="priceDiv">
@@ -90,10 +90,10 @@
             <g:textField type="number"
                          id="price"
                          name="price"
-                         class="form-control pricing text-right intNumeric priceDiv ${hasErrors(bean: itemInstance, field: 'price', 'alert alert-danger')}"
+                         class="form-control pricing text-right intNumeric priceDiv ${hasErrors(bean: item, field: 'price', 'alert alert-danger')}"
                          autocomplete="off"
                          min="0.0"
-                         value="${ !itemInstance?.price ? '0.0' : itemInstance?.price}"
+                         value="${ !item?.price ? '0.0' : item?.price}"
                          required=""/>
         </div>
     </blockquote>
@@ -112,7 +112,7 @@
 <g:javascript>
 
     $(function() {
-        if("${itemInstance?.category}" == "")
+        if("${item?.category}" == "")
             $("#category").attr("disabled","disabled")
         else {
            $('option[value=""]',"#category").remove()

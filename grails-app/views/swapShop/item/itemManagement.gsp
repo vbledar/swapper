@@ -49,6 +49,9 @@
                         </i>
                     </small>
                     <span class="pull-right">
+                        <div class="visible-xs">
+                            <br>
+                        </div>
                         <button class="btn btn-danger">
                             <span class="glyphicon glyphicon-remove"></span> <g:message code="button.label.delete"/>
                         </button>
@@ -59,37 +62,8 @@
 
         <div class="spacer10"></div>
 
-        <div class="col-sm-12">
-            <g:render template="/item/overview" model="[item: item]"/>
-        </div>
-
-        <div class="spacer10"></div>
-
-        <div class="col-sm-12">
-            <ul class="nav nav-tabs nav-justified" role="tablist">
-                <g:render template="item/itemMenu" model="[item: item]"/>
-            </ul>
-            <div class="tab-content">
-                %{--<div role="tabpanel" class="tab-pane fade in active" id="overviewTab">--}%
-                    %{--<g:render template="/item/overview" model="[item: item]"/>--}%
-                %{--</div>--}%
-
-                <div role="tabpanel" class="tab-pane fade in active" id="basicTab">
-                    <g:render template="/item/basicInformation" model="[item: item, rootCategories: rootCategories, categories: categories]"/>
-                </div>
-
-                <div role="tabpanel" class="tab-pane fade" id="detailsTab">
-                    <g:render template="/item/detailedInformation" model="[item: item]"/>
-                </div>
-
-                <div role="tabpanel" class="tab-pane fade" id="shippingTab">
-                    <g:render template="/item/shippingInformation" model="[item: item]"/>
-                </div>
-
-                <div role="tabpanel" class="tab-pane fade" id="photosTab">
-                    <g:render template="/item/photosInformation" model="[item: item]"/>
-                </div>
-            </div>
+        <div id="item-updatable-container">
+            <g:render template="/swapShop/item/itemUpdatableContainer" model="[item: item]"/>
         </div>
     </div>
 </div>
@@ -97,8 +71,10 @@
 <g:javascript>
 
     function updateSuccess(data) {
-        console.log(data);
-        $.notify(data.message, 'success')
+        $('#item-updatable-container').html(data);
+
+        var message = '<g:message code="user.message.item.update.success"/>';
+        $.notify(message, 'success')
     }
 
     function updateFailure(data) {

@@ -11,6 +11,7 @@ import com.swapper.exception.ServiceException
 import com.swapper.exception.media.PhotoContentTypeException
 import com.swapper.exception.media.PhotoSizeException
 import com.swapper.item.Item
+import com.swapper.item.ItemShipping
 import com.swapper.item.criteria.SearchCriteria
 import com.swapper.item.criteria.SearchCriteriaAttribute
 import com.swapper.user.Person
@@ -115,9 +116,12 @@ class SwapShopController extends BaseController {
             return
         }
 
-        render(contentType: "text/json") {
-            ['success': true, message : message (code: "user.message.item.update.success")]
-        }
+        render(template: '/swapShop/item/itemUpdatableContainer', model: [item: item,
+                                                                          rootCategories: categoryService.getRootCategories(params),
+                                                                          categories: categoryService.getSubCategories(item.category?.parent?.id,params),
+                                                                          selectedCategory: item.category,
+                                                                          searchCriteria: item.category.searchCriterias,
+                                                                          hasPaymentMethod: myProfileService.personHasDefinedPaymentMethod(getLoggedInUserFromDatabase())])
     }
 
     /**
@@ -144,9 +148,94 @@ class SwapShopController extends BaseController {
             return
         }
 
-        render(contentType: "text/json") {
-            ['success': true, message : message (code: "user.message.item.update.success")]
+        render(template: '/swapShop/item/itemUpdatableContainer', model: [item: item,
+                                                                          tabSelected: 'details',
+                                                                          rootCategories: categoryService.getRootCategories(params),
+                                                                          categories: categoryService.getSubCategories(item.category?.parent?.id,params),
+                                                                          selectedCategory: item.category,
+                                                                          searchCriteria: item.category.searchCriterias,
+                                                                          hasPaymentMethod: myProfileService.personHasDefinedPaymentMethod(getLoggedInUserFromDatabase())])
+    }
+
+    /**
+     * Update item shipping information.
+     */
+    def updateItemShippingInformation() {
+        Item item = Item.findById(params.id)
+        if (!item) {
+            flash.error = message(code: "user.message.item.not.found")
+            render(contentType: "text/json") {
+                ['success': false, message : message (code: "user.message.item.not.found")]
+            }
+            return
         }
+
+        ItemShipping itemShipping = item.itemShipping
+        if (!itemShipping) {
+            itemShipping = new ItemShipping(item: item)
+            item.itemShipping = itemShipping
+        }
+
+        bindData(itemShipping, params)
+
+        // custom management on shipping costs and no costs fields
+        if (!params.shippingCosts) {
+            itemShipping.shippingCosts = 0
+        }
+        if (!params.noCosts) {
+            itemShipping.noCosts = Boolean.FALSE
+        } else {
+            itemShipping.shippingCosts = 0
+        }
+
+        if (!itemShipping.save(flush: true)) {
+            log.error "Failed to update item shipping information."
+            itemShipping.errors.each {
+                log.error it
+            }
+            render(contentType: "text/json") {
+                ['success': false, message : message (code: "user.message.item.update.failed"), errors: itemShipping.errors]
+            }
+            return
+        }
+
+        render(template: '/swapShop/item/itemUpdatableContainer', model: [item: item,
+                                                                          tabSelected: 'shipping',
+                                                                          rootCategories: categoryService.getRootCategories(params),
+                                                                          categories: categoryService.getSubCategories(item.category?.parent?.id,params),
+                                                                          selectedCategory: item.category,
+                                                                          searchCriteria: item.category.searchCriterias,
+                                                                          hasPaymentMethod: myProfileService.personHasDefinedPaymentMethod(getLoggedInUserFromDatabase())])
+    }
+
+    def updateItemPhotosInformation() {
+        Item item = Item.findById(params.id)
+        if (!item) {
+            flash.error = message(code: "user.message.item.not.found")
+            render(contentType: "text/json") {
+                ['success': false, message : message (code: "user.message.item.not.found")]
+            }
+            return
+        }
+
+        try{
+            def photos = extractItemPhotos(params)
+            itemService.addItemPhotos(item.id, photos)
+        }catch(ServiceException se){
+            log.error se.message
+            render(contentType: "text/json") {
+                ['success': false, message : message (code: "user.message.item.update.failed")]
+            }
+            return
+        }
+
+        render(template: '/swapShop/item/itemUpdatableContainer', model: [item: item,
+                                                                          tabSelected: 'photos',
+                                                                          rootCategories: categoryService.getRootCategories(params),
+                                                                          categories: categoryService.getSubCategories(item.category?.parent?.id,params),
+                                                                          selectedCategory: item.category,
+                                                                          searchCriteria: item.category.searchCriterias,
+                                                                          hasPaymentMethod: myProfileService.personHasDefinedPaymentMethod(getLoggedInUserFromDatabase())])
     }
 
     /**
@@ -183,8 +272,8 @@ class SwapShopController extends BaseController {
                 flow.isQualityUser = person?.qualityUser
 
 
-                flow.itemInstance = new ItemCommand()
-                flow.itemShippingInstance = new ItemShippingCommand()
+                flow.item = new ItemCommand()
+                flow.itemShipping = new ItemShippingCommand()
                 flow.includeExistentPhotos = true   //photo form should also include the previously added photos
                 log.info "All parameters have been gathered."
             }
@@ -215,12 +304,12 @@ class SwapShopController extends BaseController {
                  * bind request parameters to item command instance in stored in flow scope
                  */
                 log.error 'Bind request parameters to item command instance.'
-                bindData(flow.itemInstance, params)
+                bindData(flow.item, params)
 
                 /**
                  * Validate item command instance.
                  */
-                if (!flow.itemInstance.validate()) {
+                if (!flow.item.validate()) {
                     log.error 'Item command instance validation failed.'
 
                     if (params.rootCategory) {
@@ -229,6 +318,10 @@ class SwapShopController extends BaseController {
                             categories << (rc.properties['id', 'parent', 'name', 'description'])
                         }
                         flow.categories = categories
+                    }
+
+                    flow.item.errors.each {
+                        log.error it
                     }
 
                     /**
@@ -248,9 +341,9 @@ class SwapShopController extends BaseController {
                     flow.categories = categories
                 }
 
-                if (flow.itemInstance.category) {
+                if (flow.item.category) {
                     log.error "Item instance has category..."
-                    flow.searchCriteria = flow.itemInstance.category.searchCriterias
+                    flow.searchCriteria = flow.item.category.searchCriterias
                 }
 
                 log.error 'Step 1 was successful. Going to next step.'
@@ -278,7 +371,7 @@ class SwapShopController extends BaseController {
                 log.error 'Parameters retrieved on next are: '
                 log.error params
 
-                flow.itemInstance.attrs = extractItemAttributes(params)
+                flow.item.attrs = extractItemAttributes(params)
             }.to('itemShippingInformation')
             /**
              * On this step user can go back by selecting the previous action.
@@ -287,7 +380,7 @@ class SwapShopController extends BaseController {
                 log.error 'Parameters retrieved on previous are: '
                 log.error params
 
-                flow.itemInstance.attrs = extractItemAttributes(params)
+                flow.item.attrs = extractItemAttributes(params)
             }.to('itemInformation')
             /**
              * On this step user can cancel the flow by selecting the cancel action.
@@ -298,11 +391,11 @@ class SwapShopController extends BaseController {
         itemShippingInformation {
             on("next"){
                 log.info params
-                bindData(flow.itemShippingInstance, params)
+                bindData(flow.itemShipping, params)
             }.to("itemPhotosInformation")
 
             on("previous"){
-                bindData(flow.itemShippingInstance, params)
+                bindData(flow.itemShipping, params)
             }.to("detailedItemInformation")
 
             on("cancel").to("cancelFinish")
@@ -310,9 +403,9 @@ class SwapShopController extends BaseController {
 
         itemPhotosInformation{
             on("next"){
-                flow.itemInstance.photos = extractItemPhotos(params)
+                flow.item.photos = extractItemPhotos(params)
 
-                if (!flow.itemInstance.photos || flow.itemInstance.photos.size() == 0) {
+                if (!flow.item.photos || flow.item.photos.size() == 0) {
                     flash.messageCode = "At least one photo of the item is required."
                     return onePhotoRequired()
                 }
@@ -320,9 +413,9 @@ class SwapShopController extends BaseController {
 
             on("previous"){
                 log.info params
-                flow.itemInstance.photos = extractItemPhotos(params)
+                flow.item.photos = extractItemPhotos(params)
 
-                flow.itemInstance.photos.each {
+                flow.item.photos.each {
                     log.error it.photoId
                 }
             }.to("itemShippingInformation")
@@ -347,8 +440,8 @@ class SwapShopController extends BaseController {
         saveItem{
             action{
                 try{
-                    def item = itemService.create(getLoggedInUserFromDatabase(), flow.itemInstance, flow.itemShippingInstance)
-                    [itemInstance: item]
+                    def item = itemService.create(getLoggedInUserFromDatabase(), flow.item, flow.itemShipping)
+                    [item: item]
 
 //                    // send notification message to administration
 //                    if (!userService.getCurrentUser().qualityUser) {
@@ -374,7 +467,7 @@ class SwapShopController extends BaseController {
 //                    }
                 }catch (EntityAwareException eae){
                     log.info(eae.message)
-                    flow.itemInstance.errors = eae.entity.errors
+                    flow.item.errors = eae.entity.errors
                     eae.entity.discard()
                     invalid()
                 }catch (ServiceException se){
@@ -517,5 +610,10 @@ class SwapShopController extends BaseController {
             log.error("Failed to upload photo.", e);
             render  new JSON(target:[error:"unknown error occured"]).toString()
         }
+    }
+
+    def renderEmptyPhotoItemList() {
+        Integer index = Integer.parseInt(params.id)
+        render (template: '/item/photos/itemEmptyPhotoDisplayer', model: [index: index+1])
     }
 }

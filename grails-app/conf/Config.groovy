@@ -93,7 +93,7 @@ grails.plugins.remotepagination.enableBootstrap=true
 
 environments {
     development {
-        grails.serverURL = "http://192.168.2.8:8080/swapper "
+        grails.serverURL = "http://192.168.2.8:8080/swapper"
 
         grails.logging.jul.usebridge = true
 

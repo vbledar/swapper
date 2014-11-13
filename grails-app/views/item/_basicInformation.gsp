@@ -1,12 +1,12 @@
 <div class="page-header">
     <h1>
-        <g:message code="item.menu.basic.information"/>
+        <g:message code="item.management.overview.basic.information.header"/>
     </h1>
 </div>
 
 <g:form name="updateItemBasicInformationForm" controller="swapShop" action="updateItemBasicInformation" id="${item?.id}" role="form">
 
-    <g:render template="/item/itemBasicInfoFormFields" model="[itemInstance: item]"/>
+    <g:render template="/item/itemBasicInfoFormFields" model="[item: item]"/>
 
 </g:form>
 

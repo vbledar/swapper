@@ -25,7 +25,7 @@
                 <div class="row">
                     <div class="col-sm-12">
                         <ul id="item-images" class="jCycle-swap-pics">
-                            <g:each in="${itemInstance?.photos}" var="photo">
+                            <g:each in="${item?.photos}" var="photo">
                                 <li>
                                     <img src="${photo?.url}" class="img-responsive img-thumbnail" style="max-width: 200px; max-height: 200px;"/>
                                 </li>
@@ -39,7 +39,7 @@
                 <div class="row">
                     <div class="col-sm-12">
                         <ul id="item-images-nav" style="width: 200px; max-height: 200px; overflow-x: hidden; overflow-y: auto; margin: 0px">
-                            <g:each in="${itemInstance?.photos}" var="photo">
+                            <g:each in="${item?.photos}" var="photo">
                                 <li>
                                     <a href="#">
                                         <sw:photoCommand photo="${photo}" size="s" cssClass="pull-left img-thumbnail" cssStyle="width: 48px; height: 48px;"/>
@@ -59,7 +59,7 @@
                     <label class="text-muted to-uppercase"><g:message code="item.status.label" default="Status"/></label>
                 </div>
                 <div class="col-sm-12 font-medium">
-                    <strong class="to-uppercase">${itemInstance?.itemStatusType?.description }</strong>
+                    <strong class="to-uppercase">${item?.itemStatusType?.description }</strong>
                 </div>
             </div>
 						
@@ -70,7 +70,7 @@
 								<label class="text-muted to-uppercase"><g:message code="item.condition.label" default="Condition:"/></label>
 							</div>
 							<div class="col-sm-12 font-medium">
-								<strong class="to-uppercase">${itemInstance?.itemConditionType?.description}</strong>
+								<strong class="to-uppercase">${item?.itemConditionType?.description}</strong>
 							</div>
 						</div>
 						
@@ -81,12 +81,12 @@
 								<label class="text-muted to-uppercase"><g:message code="item.exchange.type.label" default="Exchange Type:"/></label>
 							</div>
 							<div class="col-sm-12 font-medium">
-								<strong class="to-uppercase">${itemInstance?.itemExchangeType?.description }</strong>
+								<strong class="to-uppercase">${item?.itemExchangeType?.description }</strong>
 							</div>
 						</div>
 								
 								
-						<g:if test="${itemInstance?.itemExchangeType == ItemExchangeType.SELL || itemInstance?.itemExchangeType == ItemExchangeType.SWAPORSELL}">
+						<g:if test="${item?.itemExchangeType == ItemExchangeType.SELL || item?.itemExchangeType == ItemExchangeType.SWAPORSELL}">
 							<div class="spacer5"></div>
 							
 							<div class="row">
@@ -94,7 +94,7 @@
 									<label class="text-muted to-uppercase"><g:message code="item.price.label" default="Desired Price:"/></label>
 								</div>
 								<div class="col-sm-12 font-medium">
-									<strong>&euro; ${itemInstance?.price}</strong>
+									<strong>&euro; ${item?.price}</strong>
 <%--									<g:if test="${ !itemInstance?.itemShipping?.noCosts }">--%>
 <%--					             		<strong> --%>
 <%--					             			+ &euro; <g:fieldValue bean="${itemInstance?.itemShipping }" field="domesticCosts" /> <g:message code="item.shipping.costs" default="Shipping Costs:" />--%>
@@ -110,8 +110,8 @@
 									<label class="text-muted to-uppercase"><g:message code="item.shipping.costs" default="Shipping Costs:" /></label>
 								</div>
 								<div class="col-sm-12 font-medium">
-									<g:if test="${ !itemShippingInstance?.noCosts }">
-										<strong>&euro; ${itemShippingInstance?.shippingCosts}</strong>
+									<g:if test="${ !itemShipping?.noCosts }">
+										<strong>&euro; ${itemShipping?.shippingCosts}</strong>
 									</g:if>
 									<g:else>
 										<strong class=""><g:message code="no.costs.label" default="No shipping costs applied." /></strong>
@@ -136,7 +136,7 @@
 												<label class="text-muted to-uppercase"><g:message code="item.description.label" default="Description"/></label>
 											</div>
 											<div class="col-sm-12 font-medium">
-												<strong>${itemInstance?.description}</strong>
+												<strong>${item?.description}</strong>
 											</div>
 										</div>
 										
@@ -147,11 +147,11 @@
 												<label class="text-muted to-uppercase"><g:message code="item.designer.info.label" default="Designer Info"/></label>
 											</div>
 											<div class="col-sm-12 font-medium">
-												<g:if test="${!itemInstance.designer || itemInstance?.designer.trim().equalsIgnoreCase("")}">
+												<g:if test="${!item.designer || item?.designer.trim().equalsIgnoreCase("")}">
 													<strong>Designer information not provided.</strong>
 												</g:if>
 												<g:else>
-													<strong>${itemInstance?.designer}</strong>
+													<strong>${item?.designer}</strong>
 												</g:else>
 											</div>
 										</div>
@@ -162,12 +162,12 @@
 												<label class="text-muted"><g:message code="item.category.label" default="Category"/></label>
 											</div>
 											<div class="col-sm-12 font-medium">
-												<strong>${itemInstance?.category?.name} (${itemInstance?.category?.parent?.name})</strong>
+												<strong>${item?.category?.name} (${item?.category?.parent?.name})</strong>
 											</div>
 										</div>
 										<div class="row">
-											<g:if test="${itemInstance.attrs.size() > 0}">
-												<g:each in="${itemInstance.attrs}" var="attr">
+											<g:if test="${item.attrs.size() > 0}">
+												<g:each in="${item.attrs}" var="attr">
 													<div class="col-sm-12 font-medium">
 														<label class="text-muted">${attr.searchCriteria.shortDescription}</label>
 													</div> 
@@ -201,19 +201,19 @@
 										<div class="spacer15"></div>
 
 										<div class="row">
-											<g:if test="${itemInstance.itemExchangeType != ItemExchangeType.SWAP }">
-												<g:if test="${ itemInstance.itemExchangeType == ItemExchangeType.SELL|| itemInstance.itemExchangeType == ItemExchangeType.SWAPORSELL}">
-													<g:if test="${!itemShippingInstance?.noCosts }">
+											<g:if test="${item.itemExchangeType != ItemExchangeType.SWAP }">
+												<g:if test="${ item.itemExchangeType == ItemExchangeType.SELL|| item.itemExchangeType == ItemExchangeType.SWAPORSELL}">
+													<g:if test="${!itemShipping?.noCosts }">
 														<div class="col-sm-12 font-medium">
 															<label class="text-muted"><g:message code="item.shipping.costs.for.swap.or.buy" default="Domestic Costs"/></label>
 														</div>
 														<div class="col-sm-12 font-medium">
-															<strong>&euro; ${itemShippingInstance?.shippingCosts}</strong>
+															<strong>&euro; ${itemShipping?.shippingCosts}</strong>
 														</div>
 													</g:if>
 												</g:if>
 										    	<g:else>
-													<g:if test="${itemShippingInstance?.noCosts }">
+													<g:if test="${itemShipping?.noCosts }">
 														<div class="col-sm-12 font-medium">
 															<strong><g:message code="item.shipping.domestic.no.costs" default="No Costs Defined" /></strong>
 														</div>
