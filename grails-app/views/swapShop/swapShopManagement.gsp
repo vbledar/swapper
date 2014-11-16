@@ -36,25 +36,8 @@
         </h1>
     </div>
 
-    <div class="swapshop-container">
-        <div class="row">
-            <div class="col-sm-2">
-                <div class="row">
-                    <div class="col-sm-12 text-center">
-                        <button id="uploadItemButton" class="btn btn-primary" style="width: 100px; height: 100px">
-                            <span class="glyphicon glyphicon-plus-sign"></span><br> <g:message code="swap.shop.button.label.upload.item"/>
-                        </button>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-10">
-                <div class="row">
-                    <div class="col-sm-12 swapshop-container">
-                        <g:render template="itemsList" model="[items: items]"/>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <div id="swapShopContainer">
+        <g:render template="personsSwapShop" model="[items: items, itemsCounted: itemsCounted]"/>
     </div>
 </div>
 
@@ -63,27 +46,26 @@
 
 		<!-- Upload item action handler -->
 		$('#uploadItemButton').off('click').on('click', function(event) {
-			event.preventDefault();
-            var previous = $('.swapshop-container').html();
-			var uploadItemUrl = "${createLink(controller: 'swapShop', action: 'uploadItem')}"
-			var posting = $.post(uploadItemUrl, function() {
-			    console.log('Post away.');
-            });
+		    event.preventDefault();
 
-            posting.done(function(data) {
-                $('.swapshop-container').fadeOut(250, function() {
-				    $(this).html(data);
-				    $(this).fadeIn(250);
-				})
-            });
+            $('#flow-step-progress').removeClass('hidden');
 
-            posting.fail(function(data) {
-                $('.swapshop-container').fadeOut(250, function() {
-				    $('.swapshop-container').html(previous);
-				    $(this).fadeIn(250);
-				});
-            });
+            var url = $(this).attr('href');
+            var container = $(this).attr('container');
+            var parameters = [];
+            submitFormWithContainer(url, parameters, successHandler, failureHandler, container);
         });
+
+        function successHandler(data, container) {
+            $('#'+container).fadeOut(300, function() {
+                $(this).html(data).fadeIn(300);
+            })
+        }
+
+        function failureHandler(data) {
+            $.notify(data.message, 'error');
+            $('#flow-step-progress').addClass('hidden');
+        }
     });
 </g:javascript>
 </body>

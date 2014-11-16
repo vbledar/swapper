@@ -50,6 +50,31 @@ class SwapShopController extends BaseController {
     }
 
     /**
+     * Render the personsSwapShop template.
+     */
+    def personsSwapShop() {
+        Person person = getLoggedInUserFromDatabase()
+        if (!person) {
+            flash.error = message(code: "user.message.no.logged.in.user.found")
+            redirect(controller: "landing", action: "index")
+            return
+        }
+
+        if (!params.max) {
+            params.max = getMaximumNumberOfElementsInView()
+        }
+
+        if (!params.offset) {
+            params.offset = 0
+        }
+
+        def itemListCount = itemService.findItemsOfPerson(person, params, true)[0]
+        def itemsList = itemService.findItemsOfPerson(person, params, false)
+
+        render(template: "personsSwapShop", model: [items: itemsList, itemsCounted: itemListCount])
+    }
+
+    /**
      * Render the itemsList template used in remote pagination inside the person's items list.
      */
     def personsItems() {
@@ -481,11 +506,7 @@ class SwapShopController extends BaseController {
         }
 
         finish {
-            redirect (controller: "swapShop", action: "personsItems")
-        }
-
-        end {
-
+            redirect (controller: "swapShop", action: "personsSwapShop")
         }
     }
 
@@ -494,7 +515,7 @@ class SwapShopController extends BaseController {
      * _itemList.gsp template back to the caller.
      */
     def cancelItemUpload() {
-        redirect (controller: "swapShop", action: "personsItems")
+        redirect (controller: "swapShop", action: "personsSwapShop")
         return
     }
 

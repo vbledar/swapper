@@ -52,9 +52,8 @@
 <g:javascript>
 
     $(function() {
-
-        // Cancel flow action handler
-        $('#cancelStep').off('click').on('click', function(event) {
+        // Flow action navigation handler
+        $('.flow-navigation').off('click').on('click', function(event) {
             event.preventDefault();
 
             $('#flow-step-progress').removeClass('hidden');
@@ -62,12 +61,18 @@
             var url = $(this).attr('href');
             var container = $(this).attr('container');
             var parameters = [];
+            var formId = $(this).attr("form");
+            if (formId) {
+                var form = $('#'+$(this).attribute("form"))
+                parameters = $(form).serializeArray();
+            }
+
             submitFormWithContainer(url, parameters, successHandler, failureHandler, container);
         });
     });
 
     function successHandler(data, container) {
-        $(container).fadeOut(300, function() {
+        $('#'+container).fadeOut(300, function() {
             $(this).html(data).fadeIn(300);
         })
     }
