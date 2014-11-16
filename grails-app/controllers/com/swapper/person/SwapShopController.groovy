@@ -481,16 +481,21 @@ class SwapShopController extends BaseController {
         }
 
         finish {
-            action {
-                log.info 'Upload new item flow finished...'
-            }
-
-            on('success').to('end')
+            redirect (controller: "swapShop", action: "personsItems")
         }
 
         end {
 
         }
+    }
+
+    /**
+     * Cancels an item upload initialized flow. It will render the
+     * _itemList.gsp template back to the caller.
+     */
+    def cancelItemUpload() {
+        redirect (controller: "swapShop", action: "personsItems")
+        return
     }
 
     /**

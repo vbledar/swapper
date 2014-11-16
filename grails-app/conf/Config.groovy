@@ -93,7 +93,7 @@ grails.plugins.remotepagination.enableBootstrap=true
 
 environments {
     development {
-        grails.serverURL = "http://192.168.2.8:8080/swapper"
+        grails.serverURL = "http://localhost:8080/swapper"
 
         grails.logging.jul.usebridge = true
 
@@ -107,10 +107,10 @@ environments {
 
                     scope   = "email"
 
-                    successUri  = 'http://192.168.2.8:8080/swapper/socialManager/facebookSuccessHandler'
-                    failureUri  = 'http://192.168.2.8:8080/swapper/socialManager/facebookFailureHandler'
+                    successUri  = 'http://localhost:8080/swapper/socialManager/facebookSuccessHandler'
+                    failureUri  = 'http://localhost:8080/swapper/socialManager/facebookFailureHandler'
 
-                    callback    = "http://192.168.2.8:8080/swapper/oauth/facebook/callback"
+                    callback    = "http://localhost:8080/swapper/oauth/facebook/callback"
 
                     facebookUrl = "https://www.facebook.com/dialog/oauth"
                     graphApi    = "https://graph.facebook.com"

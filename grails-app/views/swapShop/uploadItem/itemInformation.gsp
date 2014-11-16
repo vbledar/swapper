@@ -1,33 +1,29 @@
-<div class="row">
-    <div class="hidden-xs col-sm-3">
-    </div>
-    <div class="col-xs-12 col-sm-9">
-        <div class="page-header">
-            <h3>
-                <g:message code="upload.item.flow.step.information"/>
-            </h3>
-        </div>
-    </div>
-</div>
+<g:applyLayout name="flowStep">
 
-<div class="row">
-    <div class="hidden-xs col-sm-3">
+    <content tag="flowStepHeader">
+        <g:message code="upload.item.flow.step.information"/>
+    </content>
+
+    <content tag="flowStepIndicator">
         <g:render template="uploadItem/stepIndicator" model="[stepIndicator: 1]"/>
-    </div>
-    <div class="col-xs-12 col-sm-9">
+    </content>
+
+    <content tag="flowStepBody">
         <g:form name='uploadItemForm' controller="swapShop" action="uploadItem" role="form" class="form-horizontal">
             <g:render template="/item/itemBasicInfoFormFields" model="[itemInstance: itemInstance, hasPaymentMethod: hasPaymentMethod]"/>
         </g:form>
+    </content>
 
-        <div class="row">
-            <div class="col-sm-12 text-right">
-                <button type="button" class="btn btn-primary" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
-                <button id="nextStep" type="submit" class="btn btn-primary" name="next"><span class="glyphicon glyphicon-chevron-right"></span> <g:message code="button.label.next" /></button>
-            </div>
-        </div>
-    </div>
-</div>
+    <content tag="flowStepNavigation">
+        <g:link elementId="cancelStep" controller="swapShop" action="cancelItemUpload" container="swapShopContainer" class="btn btn-danger">
+            <span class="glyphicon glyphicon-remove-circle"></span> <g:message code="button.label.cancel"/>
+        </g:link>
+        <g:link elementId="nextStep" controller="swapShop" action="uploadItem" event="next" container="swapShopContainer" class="btn btn-primary">
+            <span class="glyphicon glyphicon-chevron-right"></span> <g:message code="button.label.next"/>
+        </g:link>
+    </content>
 
+</g:applyLayout>
 
 <g:javascript>
 

@@ -198,6 +198,27 @@ function submitForm(formElement, success, failure) {
     submitInformation(action, dataInForm, success, failure);
 }
 
+function submitFormWithContainer(url, parameters, success, failure, containerId) {
+    var posting = $.post(url, parameters, function() {
+        console.log('Posting success on url' + url);
+    });
+
+    posting.done(function(data) {
+        if (data.success === false) {
+            failure(data);
+            return;
+        }
+        success(data, containerId);
+    });
+
+    posting.fail(function(data) {
+        var parameters = [];
+        parameters.success = false
+        parameters.message = "Communication failure."
+        failure(parameters);
+    });
+}
+
 function submitInformation(url, parameters, success, failure) {
     var posting = $.post(url, parameters, function() {
         console.log('Posting success on url' + url);

@@ -59,7 +59,7 @@
 </div>
 
 <g:javascript>
-	$(document).ready(function() {
+	$(function() {
 
 		<!-- Upload item action handler -->
 		$('#uploadItemButton').off('click').on('click', function(event) {
