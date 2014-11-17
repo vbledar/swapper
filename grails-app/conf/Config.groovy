@@ -117,6 +117,28 @@ environments {
                 }
             }
         }
+
+        paypal {
+            auth = "https://www.sandbox.paypal.com/cgi-bin/webscr"
+            authUrl = "https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_ap-payment&paykey="
+            url = "https://svcs.sandbox.paypal.com"
+            pay = "/AdaptivePayments/Pay"
+            execute = "/AdaptivePayments/ExecutePayment"
+            setpaymentoptions = "/AdaptivePayments/SetPaymentOptions"
+            getpaymentoptions = "/AdaptivePayments/GetPaymentOptions"
+            username = "vbledar-facilitator_api1.gmail.com"
+            password = "1362835487"
+            signature = "AjeR-9SbcdEOuwHETswewMq9.cpHAivzYTEyGR2GkPwthyBX0fJeHpll"
+            application = "APP-80W284485P519543T"
+            email = "vbbuyer0@gmail.com"
+
+            logourl = "http://109.74.203.247:8181/swap/images/static/logo-paypal-header-image.png"
+
+            businessName = "Swappybees"
+
+            ipnurl = "http://www.swappybees.com/"
+            action = "ipn/ipnDevelopmentListener.jsp"
+        }
     }
     production {
         grails.logging.jul.usebridge = false

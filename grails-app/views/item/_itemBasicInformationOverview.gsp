@@ -14,5 +14,5 @@
         <g:set var="shippingCostsFound" value="${String.valueOf(itemShipping?.shippingCosts)}"/>
     </g:else>
     <ii:informationLabel label="${message(code: "form.field.shipping.costs")}" value="${shippingCostsFound}"/>
-    <ii:informationLabel label="${message(code: "form.field.total.buy.value")}" value="${String.valueOf(item?.price + (itemShipping?.shippingCosts ? itemShipping?.shippingCosts : 0))}"/>
+    %{--<ii:informationLabel label="${message(code: "form.field.total.buy.value")}" value="${String.valueOf(item?.price + (itemShipping?.shippingCosts ? itemShipping?.shippingCosts : 0))}"/>--}%
 </g:if>

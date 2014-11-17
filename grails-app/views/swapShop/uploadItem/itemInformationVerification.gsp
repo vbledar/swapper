@@ -32,6 +32,13 @@
                 <g:render template="/item/itemBasicInformationOverview" model="[item: item, itemShipping: itemShipping]"/>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="divider"></div>
+                        <div class="spacer10"></div>
+                    </div>
+                </div>
+
                 <g:render template="/item/itemDetailedInfoSummary" model="[item: item, itemShipping: itemShipping]"/>
             </div>
         </div>
@@ -39,13 +46,13 @@
 
     <content tag="flowStepNavigation">
         <g:link elementId="cancelStep" controller="swapShop" action="cancelItemUpload" container="swapShopContainer" class="btn btn-danger flow-navigation">
-            <span class="glyphicon glyphicon-remove-circle"></span> <div class="hidden-xs"><g:message code="button.label.cancel"/></div>
+            <span class="glyphicon glyphicon-remove-circle"></span> <span class="hidden-xs"><g:message code="button.label.cancel"/></span>
         </g:link>
         <g:link elementId="previousStep" controller="swapShop" action="uploadItem" event="previous" container="swapShopContainer" form="uploadItemForm" class="btn btn-primary flow-navigation">
-            <span class="glyphicon glyphicon-chevron-left"></span> <div class="hidden-xs"><g:message code="button.label.previous" /></div>
+            <span class="glyphicon glyphicon-chevron-left"></span> <span class="hidden-xs"><g:message code="button.label.previous" /></span>
         </g:link>
         <g:link elementId="nextStep" controller="swapShop" action="uploadItem" event="next" container="swapShopContainer" form="uploadItemForm" class="btn btn-primary flow-navigation">
-            <span class="glyphicon glyphicon-chevron-right"></span> <div class="hidden-xs"><g:message code="button.label.next"/></div>
+            <span class="glyphicon glyphicon-save"></span> <span class="hidden-xs"><g:message code="button.label.save"/></span>
         </g:link>
     </content>
 

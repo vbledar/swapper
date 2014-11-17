@@ -39,7 +39,7 @@
                                 </g:link>
                             </div>
                             <div class="btn-group">
-                                <button type="button" class="btn btn-primary btn-sm">
+                                <g:link controller="wallet" action="walletManagement" class="btn btn-primary btn-sm">
                                     <span class="glyphicon glyphicon-credit-card"></span>
                                     <span class="hidden-xs">
                                         <div class="row">
@@ -47,7 +47,7 @@
                                         <g:message code="user.menu.wallet"/></div>
                                         </div>
                                     </span>
-                                </button>
+                                </g:link>
                             </div>
                             <div class="btn-group">
                                 <button type="button" class="btn btn-primary btn-sm">

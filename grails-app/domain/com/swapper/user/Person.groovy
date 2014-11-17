@@ -26,6 +26,8 @@ class Person extends BaseRecord {
 
     PersonPhoto photo
 
+    static hasOne = [wallet: Wallet]
+
     static hasMany = [addresses: Address, paymentMethods: PaymentMethod, items: Item]
 
     static constraints = {
@@ -43,6 +45,8 @@ class Person extends BaseRecord {
         photo nullable: true
 
         qualityUser nullable: false
+
+        wallet nullable: false
 
         addresses nullable: true
         paymentMethods nullable: true
