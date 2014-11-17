@@ -18,3 +18,31 @@
         </div>
     </div>
 </div>
+
+<g:javascript>
+    $(function() {
+
+        <!-- Upload item action handler -->
+        $('#uploadItemButton').off('click').on('click', function(event) {
+            event.preventDefault();
+
+            $('#flow-step-progress').removeClass('hidden');
+
+            var url = $(this).attr('href');
+            var container = $(this).attr('container');
+            var parameters = [];
+            submitFormWithContainer(url, parameters, successHandler, failureHandler, container);
+        });
+
+        function successHandler(data, container) {
+            $('#'+container).fadeOut(300, function() {
+                $(this).html(data).fadeIn(300);
+            })
+        }
+
+        function failureHandler(data) {
+            $.notify(data.message, 'error');
+            $('#flow-step-progress').addClass('hidden');
+        }
+    });
+</g:javascript>

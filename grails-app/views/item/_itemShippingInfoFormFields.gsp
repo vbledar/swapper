@@ -13,12 +13,10 @@
 
 <g:if test="${ item?.itemExchangeType != com.swapper.enums.item.ItemExchangeType.SWAP }">
     <blockquote>
-        <div class="checkbox ${hasErrors(bean: itemShipping, field: 'noCosts', 'has-error')}">
-            <label>
-                <g:checkBox id="noCosts" name="noCosts" value="${itemShipping?.noCosts}" style="cursor: pointer"/>
-                <label id="no-costs-label" class="control-label"><g:message code="form.field.no.costs.label"/></label>
-            </label>
-        </div>
+        <label>
+            <g:checkBox id="noCosts" name="noCosts" value="${itemShipping?.noCosts}" style="cursor: pointer"/>
+            <label id="no-costs-label" class="control-label"><g:message code="form.field.no.costs.label"/></label>
+        </label>
     </blockquote>
 
     <blockquote>

@@ -38,6 +38,10 @@
     </g:each>
 </div>
 
+<g:link elementId="emptyPhotoListItem" controller="swapShop" action="renderEmptyPhotoItemList" absolute="true" class="hidden">
+
+</g:link>
+
 <g:javascript>
 	$(function() {
 		//upload photo file
@@ -152,7 +156,11 @@
         var finalPhotoUrl = name + '_q' + extension;
         $('.image-show-' + placeholderId).css("background-image", "url(" + finalPhotoUrl + ")");
         console.log("retrieving empty photo item")
-        var url = '<g:createLink controller="swapShop" action="renderEmptyPhotoItemList"/>' + "/" + placeholderId;
+
+        var url = $('#emptyPhotoListItem').attr('href');
+        var qmIndex = url.indexOf('?');
+        url = url.substring(0, qmIndex) + "/" + placeholderId;
+        %{--var url = '<g:createLink controller="swapShop" action="renderEmptyPhotoItemList" absolute="true"/>' + "/" + placeholderId;--}%
 
         $("<li>").load(url, function() {
             $(".image-list-pop").append($(this).html());

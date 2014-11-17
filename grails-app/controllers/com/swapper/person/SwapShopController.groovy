@@ -318,6 +318,7 @@ class SwapShopController extends BaseController {
          * User can input item basic information like name, description, categories, etc...
          */
         itemInformation {
+            render(template: '/swapShop/uploadItem/itemInformation')
             /**
              * On next action the item command must be validated.
              */
@@ -388,6 +389,7 @@ class SwapShopController extends BaseController {
         }
 
         detailedItemInformation {
+            render(template: '/swapShop/uploadItem/detailedItemInformation')
             /**
              * On next action the selected attributes are attached to the item command
              * and flow proceeds to the next step.
@@ -414,19 +416,30 @@ class SwapShopController extends BaseController {
         }
 
         itemShippingInformation {
+            render(template: '/swapShop/uploadItem/itemShippingInformation')
+
             on("next"){
-                log.info params
                 bindData(flow.itemShipping, params)
+
+                if (!params.shippingCosts) {
+                    flow.itemShipping.shippingCosts = 0
+                }
             }.to("itemPhotosInformation")
 
             on("previous"){
                 bindData(flow.itemShipping, params)
+
+                if (!params.shippingCosts) {
+                    flow.itemShipping.shippingCosts = 0
+                }
             }.to("detailedItemInformation")
 
             on("cancel").to("cancelFinish")
         }
 
         itemPhotosInformation{
+            render(template: '/swapShop/uploadItem/itemPhotosInformation')
+
             on("next"){
                 flow.item.photos = extractItemPhotos(params)
 
@@ -450,6 +463,7 @@ class SwapShopController extends BaseController {
         }
 
         itemInformationVerification{
+            render(template: '/swapShop/uploadItem/itemInformationVerification')
 
             on("next"){
                 log.error "Item verification save item."

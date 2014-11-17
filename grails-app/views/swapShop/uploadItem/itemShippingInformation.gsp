@@ -1,35 +1,32 @@
-<div class="row">
-    <div class="hidden-xs col-sm-3">
-    </div>
-    <div class="col-xs-12 col-sm-9">
-        <div class="page-header">
-            <h3>
-                <g:message code="upload.item.flow.step.shipping"/>
-            </h3>
-        </div>
-    </div>
-</div>
+<g:applyLayout name="flowStep">
 
-<div class="row">
-    <div class="hidden-xs col-sm-3">
+    <content tag="flowStepHeader">
+        <g:message code="upload.item.flow.step.shipping"/>
+    </content>
+
+    <content tag="flowStepIndicator">
         <g:render template="uploadItem/stepIndicator" model="[stepIndicator: 3]"/>
-    </div>
-    <div class="col-xs-12 col-sm-9">
-        <g:form name='uploadItemForm' controller="swapShop" action="uploadItem" role="form">
+    </content>
 
+    <content tag="flowStepBody">
+        <g:form name='uploadItemForm' controller="swapShop" action="uploadItem" role="form" class="form-horizontal">
+            <g:render template="/item/itemShippingInfoFormFields" model="[itemShipping: itemShipping]"/>
         </g:form>
+    </content>
 
-        <div class="row">
-            <div class="col-sm-12 text-right">
-                <button type="button" class="btn btn-primary" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> <g:message code="button.label.cancel"/></button>
-                <button id="previousStep" type="submit" class="btn btn-primary" name="previous"><span class="glyphicon glyphicon-chevron-left"></span> <g:message code="button.label.previous"/></button>
-                <button id="nextStep" type="submit" class="btn btn-primary" name="next"><span class="glyphicon glyphicon-chevron-right"></span> <g:message code="button.label.next" /></button>
-            </div>
-        </div>
-    </div>
-</div>
+    <content tag="flowStepNavigation">
+        <g:link elementId="cancelStep" controller="swapShop" action="cancelItemUpload" container="swapShopContainer" class="btn btn-danger flow-navigation">
+            <span class="glyphicon glyphicon-remove-circle"></span> <div class="hidden-xs"><g:message code="button.label.cancel"/></div>
+        </g:link>
+        <g:link elementId="previousStep" controller="swapShop" action="uploadItem" event="previous" container="swapShopContainer" form="uploadItemForm" class="btn btn-primary flow-navigation">
+            <span class="glyphicon glyphicon-chevron-left"></span> <div class="hidden-xs"><g:message code="button.label.previous" /></div>
+        </g:link>
+        <g:link elementId="nextStep" controller="swapShop" action="uploadItem" event="next" container="swapShopContainer" form="uploadItemForm" class="btn btn-primary flow-navigation">
+            <span class="glyphicon glyphicon-chevron-right"></span> <div class="hidden-xs"><g:message code="button.label.next"/></div>
+        </g:link>
+    </content>
 
-
+</g:applyLayout>
 
 <g:javascript>
 	$(function() {
@@ -47,63 +44,12 @@
 				$('#domestic').attr('disabled', 'true').attr('checked', false)
 				$('#shippingCosts').attr('disabled', 'true').val('0.0')
 				$('#userInformationPlaceholder').parent().parent().slideUp(300);
-//				$('#domesticCosts').qtip('destroy');
 			} else {
 				$('#domestic').removeAttr('disabled')
 				$('#domestic').attr('checked', true)
 				$('#shippingCosts').removeAttr('disabled').val('0.0')
 				$('#userInformationPlaceholder').parent().parent().slideDown(300);
-//				$('#domesticCosts').qtip({
-//	               content: 'Fees applied to ship your item in domestic destination, this fees will be charged to the buyer.',
-//	               show: { ready: true },
-//	               position: {
-//	                    my: 'left center',
-//	                    at: 'right center',
-//	                    viewport: $(window),
-//	                    adjust: { x: 10, y: 0 }
-//	               }
-//	            });
 			}
-		});
-
-        $('#previousStep').off('click').on('click', function(event) {
-			console.log('Next step action...');
-			event.preventDefault();
-
-            var dataInForm = $('#uploadItemForm').serializeArray();
-            console.log("Serialized form data: " + dataInForm);
-
-            var uploadItemUrl = '${createLink(controller: 'swapShop', action: 'uploadItem', event: 'previous')}';
-            console.log(uploadItemUrl)
-            $.post(uploadItemUrl, dataInForm, function(data, textStatus, jqXHR) {
-                console.log('Post succeeded...');
-                $('.swapshop-container').fadeOut(250, function() {
-                    $(this).html(data);
-                    $(this).fadeIn(250);
-                });
-            }).fail(function() {
-                console.log('Post failed...');
-			});
-		});
-
-		$('#nextStep').off('click').on('click', function(event) {
-			console.log('Next step action...');
-			event.preventDefault();
-
-            var dataInForm = $('#uploadItemForm').serializeArray();
-            console.log("Serialized form data: " + dataInForm);
-
-            var uploadItemUrl = '${createLink(controller: 'swapShop', action: 'uploadItem', event: 'next')}';
-            console.log(uploadItemUrl)
-            $.post(uploadItemUrl, dataInForm, function(data, textStatus, jqXHR) {
-                console.log('Post succeeded...');
-                $('.swapshop-container').fadeOut(250, function() {
-                    $(this).html(data);
-                    $(this).fadeIn(250);
-                })
-            }).fail(function() {
-                console.log('Post failed...');
-            });
 		});
 
 		$('#no-costs-label').off('click').on('click', function(event) {
@@ -114,23 +60,11 @@
 				$('#domestic').attr('checked', true)
 				$('#shippingCosts').removeAttr('disabled').val('0.0')
 				$('#userInformationPlaceholder').parent().parent().slideDown(300);
-//				$('#domesticCosts').qtip({
-//	               content: 'Fees applied to ship your item in domestic destination, this fees will be charged to the buyer.',
-//	               show: { ready: true },
-//	               position: {
-//	                    my: 'left center',
-//	                    at: 'right center',
-//	                    viewport: $(window),
-//	                    adjust: { x: 10, y: 0 }
-//	               }
-//	            });
-
 				$('#noCosts').prop('checked', false);
 			} else {
 				$('#domestic').attr('disabled', 'true').attr('checked', false)
 				$('#shippingCosts').attr('disabled', 'true').val('0.0')
 				$('#userInformationPlaceholder').parent().parent().slideUp(300);
-//				$('#domesticCosts').qtip('destroy');
 
 				$('#noCosts').prop('checked', true);
 			}

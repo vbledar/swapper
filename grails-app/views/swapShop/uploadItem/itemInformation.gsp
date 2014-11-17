@@ -16,69 +16,11 @@
 
     <content tag="flowStepNavigation">
         <g:link elementId="cancelStep" controller="swapShop" action="cancelItemUpload" container="swapShopContainer" class="btn btn-danger flow-navigation">
-            <span class="glyphicon glyphicon-remove-circle"></span> <g:message code="button.label.cancel"/>
+            <span class="glyphicon glyphicon-remove-circle"></span> <div class="hidden-xs"><g:message code="button.label.cancel"/></div>
         </g:link>
         <g:link elementId="nextStep" controller="swapShop" action="uploadItem" event="next" container="swapShopContainer" form="uploadItemForm" class="btn btn-primary flow-navigation">
-            <span class="glyphicon glyphicon-chevron-right"></span> <g:message code="button.label.next"/>
+            <span class="glyphicon glyphicon-chevron-right"></span> <div class="hidden-xs"><g:message code="button.label.next"/></div>
         </g:link>
     </content>
 
 </g:applyLayout>
-
-<g:javascript>
-
-    $(function() {
-
-        %{--$('#nextStep').off('click').on('click', function(event) {--}%
-			%{--console.log('Next step action...');--}%
-			%{--event.preventDefault();--}%
-
-            %{--var previous = $('.swapshop-container').html();--}%
-            %{--var dataInForm = $('#uploadItemForm').serializeArray();--}%
-            %{--var uploadItemUrl = '${createLink(controller: 'swapShop', action: 'uploadItem', event: 'next')}';--}%
-			%{--var posting = $.post(uploadItemUrl, dataInForm, function() {--}%
-			    %{--console.log('Posting success');--}%
-            %{--});--}%
-
-            %{--posting.done(function(data) {--}%
-                %{--$('.swapshop-container').fadeOut(250, function() {--}%
-
-                    %{--$("#uploadItemForm").find("input").each(function( index ) {--}%
-                        %{--$(this).removeClass("alert").removeClass("alert-danger");--}%
-                    %{--});--}%
-
-                    %{--if (data.errors) {--}%
-                        %{--$.map(data.errors, function(value, index) {--}%
-                            %{--$.map(value, function(field, index) {--}%
-
-
-                                %{--$("#uploadItemForm").find("input").each(function( index ) {--}%
-                                     %{--var fieldName = $(this).attr("name");--}%
-                                     %{--if (fieldName === field.field) {--}%
-                                        %{--$(this).addClass("alert").addClass("alert-danger");--}%
-                                     %{--}--}%
-                                %{--});--}%
-                            %{--});--}%
-                        %{--});--}%
-                        %{--for (var errors in data.errors) {--}%
-                            %{--for (var error in errors) {--}%
-                                %{--console.log(error.field);--}%
-                            %{--}--}%
-                        %{--}--}%
-                    %{--}--}%
-
-				    %{--$(this).html(data);--}%
-				    %{--$(this).fadeIn(250);--}%
-				%{--})--}%
-            %{--});--}%
-
-            %{--posting.fail(function(data) {--}%
-                %{--$('.swapshop-container').fadeOut(250, function() {--}%
-				    %{--$('.swapshop-container').html(previous);--}%
-				    %{--$(this).fadeIn(250);--}%
-				%{--});--}%
-            %{--});--}%
-		%{--});--}%
-
-    });
-</g:javascript>

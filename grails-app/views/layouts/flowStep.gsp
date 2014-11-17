@@ -36,6 +36,13 @@
     <div class="hidden-xs col-sm-3">
     </div>
     <div class="col-xs-12 col-sm-9 text-right">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="divider"></div>
+                <div class="spacer10"></div>
+            </div>
+        </div>
+
         <div class="col-xs-12 col-sm-6">
             <div id="flow-step-progress" class="progress hidden">
                 <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
@@ -63,8 +70,7 @@
             var parameters = [];
             var formId = $(this).attr("form");
             if (formId) {
-                var form = $('#'+$(this).attribute("form"))
-                parameters = $(form).serializeArray();
+                parameters = $('#'+formId).serializeArray();
             }
 
             submitFormWithContainer(url, parameters, successHandler, failureHandler, container);

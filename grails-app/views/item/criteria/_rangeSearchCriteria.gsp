@@ -11,7 +11,7 @@
                             <br>
                         </g:if>
                         <g:set var="attr_val" value="${Double.valueOf(attr).doubleValue()}"/>
-                        <g:set var="active" value="${itemInstance?.findRangeAttributeIfSelected(criterio.id, attr_val) ? 'active' : ''}"/>
+                        <g:set var="active" value="${item?.findRangeAttributeIfSelected(criterio.id, attr_val) ? 'active' : ''}"/>
                         <label class="btn btn-primary ${active}">
                             ${attr_val}
                             <g:if test="${active}">
