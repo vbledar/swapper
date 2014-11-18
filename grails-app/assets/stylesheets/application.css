@@ -227,3 +227,14 @@ div.divider {
     clear: both;
     border-bottom: 1px dotted #c9c6bf;
 }
+
+/*
+ * Selectors
+ */
+.selection-item:hover {
+    cursor: pointer;
+}
+
+.selection-item.active {
+    border-color: rgb(49, 59, 75) !important;
+}

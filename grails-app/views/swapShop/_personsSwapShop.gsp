@@ -3,9 +3,11 @@
         <div class="col-sm-2">
             <div class="row">
                 <div class="col-sm-12 text-center">
-                    <g:link elementId="uploadItemButton" controller="swapShop" action="uploadItem" container="swapShopContainer" class="btn btn-primary" style="width: 100px; height: 100px; vertical-align: middle;">
+                    <button id="uploadItemButton" container="swapShopContainer" class="btn btn-primary" style="width: 100px; height: 100px;" href="${createLink(controller: 'swapShop', action: 'uploadItem')}">
+                    %{--<g:link elementId="uploadItemButton" controller="swapShop" action="uploadItem" container="swapShopContainer" class="btn btn-primary" style="width: 100px; height: 100px; vertical-align: middle;">--}%
                         <span class="glyphicon glyphicon-plus-sign"></span><br> <g:message code="swap.shop.button.label.upload.item"/>
-                    </g:link>
+                    %{--</g:link>--}%
+                    </button>
                 </div>
             </div>
         </div>

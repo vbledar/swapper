@@ -7,19 +7,19 @@
 
 <%@ page contentType="text/html;charset=UTF-8" %>
 
-<div class="row">
-    <div class="hidden-xs col-sm-3">
-    </div>
-    <div class="col-xs-12 col-sm-9">
-        <div class="page-header">
-            <h3>
-                <g:if test="${pageProperty(name: "page.flowStepHeader")}">
-                    <g:pageProperty name="page.flowStepHeader"/>
-                </g:if>
-            </h3>
-        </div>
-    </div>
-</div>
+%{--<div class="row">--}%
+    %{--<div class="hidden-xs col-sm-3">--}%
+    %{--</div>--}%
+    %{--<div class="col-xs-12 col-sm-9">--}%
+        %{--<div class="page-header">--}%
+            %{--<h3>--}%
+                %{--<g:if test="${pageProperty(name: "page.flowStepHeader")}">--}%
+                    %{--<g:pageProperty name="page.flowStepHeader"/>--}%
+                %{--</g:if>--}%
+            %{--</h3>--}%
+        %{--</div>--}%
+    %{--</div>--}%
+%{--</div>--}%
 
 <div class="row">
     <div class="hidden-xs col-sm-3">

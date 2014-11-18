@@ -26,7 +26,7 @@
 </content>
 
 <div class="internal_container">
-    <div class="page-header text-center">
+    <div class="page-header">
         <h1>
             <g:message code="swap.shop.management.header"/>
             <br />
