@@ -75,6 +75,23 @@
                         </div>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="btn-group flat-btn-group btn-group-justified">
+                            <div class="btn-group">
+                                <g:link controller="admin" action="administration" class="btn btn-primary btn-sm">
+                                    <span class="glyphicon glyphicon-wrench"></span>
+                                    <span class="hidden-xs">
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <g:message code="user.menu.administration"/></div>
+                                        </div>
+                                    </span>
+                                </g:link>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

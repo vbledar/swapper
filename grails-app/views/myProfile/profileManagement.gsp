@@ -79,6 +79,9 @@
             <g:if test="${"address".equalsIgnoreCase(showContent)}">
                 <g:render template="personAddressesInfo" model="[addresses: addresses]"/>
             </g:if>
+            <g:if test="${"payment".equalsIgnoreCase(showContent)}">
+                <g:render template="personPaymentMethodInfo" model="[paymentMethods: paymentMethods]"/>
+            </g:if>
             <g:else>
                 <g:render template="personBasicInfo" model="[person: person]"/>
             </g:else>

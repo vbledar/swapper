@@ -18,7 +18,9 @@ class MyProfileController {
             return
         }
 
-        render(view: "profileManagement", model: [person: person, addresses: person?.addresses])
+        String showContent = params.goToContent
+
+        render(view: "profileManagement", model: [person: person, addresses: person?.addresses, paymentMethods: person?.paymentMethods, showContent: showContent])
     }
 
     /**

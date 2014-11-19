@@ -26,6 +26,14 @@
 
         <g:render template="/standard/defaultHeader"/>
 
+
+        <g:if test="${showPaymentMethodRequiredMessage}">
+            <div class="spacer30"></div>
+            <div class="internal_container">
+                <g:render template="/standard/userInformation/paymentMethodRequiredMessage"/>
+            </div>
+        </g:if>
+
         <div class="container-fluid">
             <div class="row">
                 <div class="col-sm-12">
