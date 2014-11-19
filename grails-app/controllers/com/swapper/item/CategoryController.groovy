@@ -1,16 +1,18 @@
 package com.swapper.item
 
-
+import com.swapper.BaseController
+import com.swapper.user.Person
 
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
 
 @Transactional(readOnly = true)
-class CategoryController {
+class CategoryController extends BaseController {
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
     def categoryService
+    def itemService
 
     def subcategories(){
         log.error params
@@ -18,6 +20,28 @@ class CategoryController {
         def categories = categoryService.getSubCategories(params.id?.toLong(),params)
         log.error categories?.size()
         render(template: "categoriesDropdown", model: [categories: categories])
+    }
+
+    def items() {
+        params.max = getMaximumNumberOfElementsInView()
+        render(view: '/item/itemsList', model: filterItems(params))
+    }
+
+    protected Map filterItems(def params){
+        def category = categoryService.getCategoryByNameAndParentName(params.subcat,params.maincat)
+        def items = itemService.listItemsOfCategory(category, params, Boolean.FALSE)
+        def itemsCount = itemService.listItemsOfCategory(category, params, Boolean.TRUE)
+
+        List searchCriteria = category.getSearchCriterias().asList()
+
+        log.error "Items count is: " + items
+
+        return [ maincat : params.maincat,
+                 subcat: params.subcat,
+                 items: items,
+                 itemsCount: itemsCount,
+                 searchCriteria: searchCriteria,
+                 user: (Person) getLoggedInUserFromDatabase()]
     }
 
     /**

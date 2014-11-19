@@ -24,6 +24,7 @@ import com.swapper.item.criteria.RangeSearchCriteria
 import com.swapper.multimedia.photo.ItemPhoto
 import com.swapper.user.Person
 import com.swapper.util.EnumUtilityMethods
+import com.swapper.util.ItemUtils
 import grails.transaction.Transactional
 import org.hibernate.criterion.CriteriaSpecification
 
@@ -315,5 +316,164 @@ class ItemService {
                 }
             }
         }
+    }
+
+    /**
+     * provided a list of params criteria, fetch either the total items that satisfy the criteria,
+     * or the item list for the specified offset max params
+     * @param category
+     * @param params
+     * @param count : whether to return the total number od items
+     * @return
+     * @throws ServiceException
+     */
+    def listItemsOfCategory(Category category, def params, boolean count) throws com.swapper.exception.ServiceException {
+        String swapBuyType = params.swapBuyType?: "ANY"
+        String conditionStateType = params.conditionStateType?: "ANY"
+        String dateOrder = params.dateOrder ? params.dateOrder : "newest"
+
+        BigDecimal priceFrom
+        BigDecimal priceTo
+
+        try{
+            priceFrom = (params.priceFrom == null || params.priceFrom == '') ? 0 : BigDecimal.valueOf((new Double(params.priceFrom)).doubleValue())
+            priceTo = (params.priceTo == null || params.priceTo == '') ? Integer.MAX_VALUE : BigDecimal.valueOf((new Double(params.priceTo)).doubleValue())
+        }
+        catch(Exception e){
+            throw new RuntimeException("Cannot parse price values: priceForm--> ${params.priceForm}, priceTo--> ${params.priceTo}")
+        }
+
+
+        def criteria = [:]
+
+        def listCriteriaMap = ItemUtils.createListSearchCriteriaMap(params)
+        def rangeCriteriaMap = ItemUtils.createRangeSearchCriteriaMap(params)
+        def booleanCriteriaMap = ItemUtils.createBooleanSearchCriteriaMap(params)
+
+        criteria << listCriteriaMap
+        criteria << rangeCriteriaMap
+        criteria << booleanCriteriaMap
+
+        StringBuilder sb = new StringBuilder()
+        Map<String, Object> sqlParameters = new HashMap<String, Object>()
+
+        if(count == Boolean.TRUE){
+            sb.append("select count(DISTINCT itm) FROM Item itm ")
+        }
+        else{
+            sb.append("select DISTINCT itm FROM Item itm ")
+        }
+
+        if(criteria?.size() > 0){
+            criteria.eachWithIndex {k, v, idx ->
+                sb.append(" INNER JOIN itm.attributes as attr${idx+1} ")
+            }
+        }
+
+        sb.append(" WHERE ")
+
+        //add category id criterio
+        if(category){
+            log.info 'Category selected id is: ' + category.id + "(" + category.name + ")"
+
+            sb.append(" itm.category.id = :categoryId ")
+            sqlParameters.put("categoryId", category.id)
+            sb.append(" AND ")
+        }
+
+        //add search keyword criterio
+        if(params.searchTerm){
+            log.info 'Search term used is: ' + params.searchTerm
+            log.info 'Search will comply to: ' + '%' + params.searchTerm + '%'
+            sb.append(" (itm.category.description like :searchTerm OR itm.description like :searchTerm OR itm.name like :searchTerm) ")
+            sqlParameters.put("searchTerm", '%' + params.searchTerm + '%')
+            sb.append(" AND ")
+        }
+
+        //add swap/buy criterio (if any selected don't use condition)
+        if(!"ANY".equals(swapBuyType)) {
+            sb.append(" itm.itemExchangeType = :swapBuyType ")
+            sqlParameters.put("swapBuyType", ItemExchangeType.valueOf(swapBuyType))
+            sb.append(" AND ")
+        }
+
+        //only visible items
+        sb.append(" itm.itemVisibilityType = :visibility ")
+        sqlParameters.put("visibility", ItemVisibilityType.VISIBLE)
+
+        //add price range criteria
+        if(ItemExchangeType.SELL.name().equals(swapBuyType)) {
+            sb.append(" AND ")
+            sb.append(" (itm.price >= :priceFrom OR itm.price is null) AND (itm.price <= :priceTo OR itm.price is null) ")
+            sqlParameters.put("priceFrom", priceFrom)
+            sqlParameters.put("priceTo", priceTo)
+        }
+
+        // add item condition criteria
+        if(!"ANY".equals(conditionStateType)) {
+            sb.append(" AND ")
+            sb.append(" itm.itemConditionType = :conditionStateType ")
+            sqlParameters.put("conditionStateType", ItemConditionType.valueOf(conditionStateType))
+        }
+
+        //add search attribute criteria
+        criteria.eachWithIndex {k, v, idx ->
+            if(criteria?.size() > 0){
+                sb.append(" AND (")
+                sb.append("attr${idx+1}.searchCriteria.id = ${k} AND ( ")
+                v.eachWithIndex {it, i ->
+                    if(i > 0){
+                        sb.append(" OR ")
+                    }
+                    if(it instanceof Double){
+                        sb.append("attr${idx+1}.numberValue = ${it} ")
+                    }
+                    else if(it instanceof String ){
+                        sb.append("attr${idx+1}.stringValue = '${it}'")
+                    }
+                    else if(it instanceof Boolean){
+                        sb.append("attr${idx+1}.booleanValue = ${it}")
+                    }
+                }
+
+                sb.append("))")
+            }
+        }
+
+
+        // show or not unavailable items
+        if (params.showunavailable) {
+            if (params.showunavailable == 'false') {
+                sb.append(" AND itm.itemStatusType = 'AVAILABLE'");
+            }
+        }
+
+        //add order by
+        if(count == Boolean.FALSE){
+            sb.append(" ORDER BY itm.itemStatusType ASC")
+
+            if (dateOrder == 'oldest') {
+                sb.append(" , itm.dateCreated ASC ")
+            } else {
+                sb.append(" , itm.dateCreated DESC ")
+            }
+        }
+
+//        println "QUERY::::: ${sb.toString()}"
+
+        def results
+        if(count == Boolean.TRUE){
+            results = Item.executeQuery(sb.toString(), sqlParameters).get(0)
+        }
+        else{
+            if ((params.max instanceof java.lang.String ? Integer.valueOf(params.max) : params.max) > 0)
+                results = Item.executeQuery(sb.toString(), sqlParameters, [max: params.max, offset: (params.offset == null ? 0 : params.offset)])
+            else
+                results = Item.executeQuery(sb.toString(), sqlParameters)
+        }
+
+        log.info 'Query to execute is: ' + sb.toString()
+
+        return results
     }
 }

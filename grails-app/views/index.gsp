@@ -8,6 +8,5 @@
 
     <div class="spacer30"></div>
 
-    <g:render template="/standard/categoriesMenuLarge"/>
 	</body>
 </html>

@@ -12,6 +12,7 @@
 //= require jquery.easing.1.3.js
 //= require notify.js
 //= require jquery.colorbox.js
+//= require jquery.iconmenu.js
 
 if (typeof jQuery !== 'undefined') {
 	(function($) {

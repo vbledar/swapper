@@ -26,6 +26,9 @@
 
         <g:render template="/standard/defaultHeader"/>
 
+        <g:render template="/standard/categoriesMenu" model="[mainCategories: com.swapper.item.Category.getMainCategories()]"/>
+
+        <div class="spacer30"></div>
 
         <g:if test="${showPaymentMethodRequiredMessage}">
             <div class="spacer30"></div>

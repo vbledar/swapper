@@ -64,17 +64,17 @@ class CategoryService {
 
         return Category.get(id)
     }
-//
-//    Category getCategoryByNameAndParentName(String name, parentName) throws ServiceException{
-//        return Category.createCriteria().get{
-//            parent{
-//                ilike('name',parentName)
-//            }
-//            ilike('name',name)
-//            eq("visible", Boolean.TRUE)
-//        }
-//    }
-//
+
+    Category getCategoryByNameAndParentName(String name, parentName) throws ServiceException{
+        return Category.createCriteria().get{
+            parent{
+                ilike('name',parentName)
+            }
+            ilike('name',name)
+            eq("visible", Boolean.TRUE)
+        }
+    }
+
     List getSubCategories(long id, def properties) throws ServiceException {
 
         def parentCategory = getCategory(id)

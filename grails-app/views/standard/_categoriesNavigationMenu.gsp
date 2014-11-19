@@ -26,13 +26,13 @@ ul.sdt_menu.li{
 
 <div class="content">
 
-    <nav class="navbar navbar-default" role="navigation">
-        <div class="container-fluid">
+    %{--<nav class="navbar navbar-default" role="navigation">--}%
+        %{--<div class="container-fluid">--}%
 
             <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
-                    <li>
+            %{--<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">--}%
+                %{--<ul class="nav navbar-nav">--}%
+                    %{--<li>--}%
                         <ul id="sdt_menu" class="sdt_menu">
                             <li class="btn btn-primary">
                                 <a href="#">
@@ -72,9 +72,9 @@ ul.sdt_menu.li{
                         </ul>
                     </li>
                 </ul>
-            </div><!-- /.navbar-collapse -->
-        </div><!-- /.container-fluid -->
-    </nav>
+            %{--</div><!-- /.navbar-collapse -->--}%
+        %{--</div><!-- /.container-fluid -->--}%
+    %{--</nav>--}%
 </div>
 
 <script type="text/javascript">

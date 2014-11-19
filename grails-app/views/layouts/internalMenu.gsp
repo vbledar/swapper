@@ -9,7 +9,10 @@
 <g:applyLayout name="main">
 
     <g:if test="${pageProperty(name: "page.internalMenu")}">
-        <g:pageProperty name="page.internalMenu"/>
+        <div class="container_80" style="margin-right: auto; margin-left: auto;">
+            <g:pageProperty name="page.internalMenu"/>
+        </div>
+
         <div class="spacer10"></div>
     </g:if>
 

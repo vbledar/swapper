@@ -55,11 +55,11 @@
                         <g:sortableColumn property="dateCreated"
                                           title="${message(code: 'category.dateCreated.label', default: 'Date Created')}"/>
 
-                        <g:sortableColumn property="description"
-                                          title="${message(code: 'category.description.label', default: 'Description')}"/>
-
                         <g:sortableColumn property="lastUpdated"
                                           title="${message(code: 'category.lastUpdated.label', default: 'Last Updated')}"/>
+
+                        <g:sortableColumn property="description"
+                                          title="${message(code: 'category.description.label', default: 'Description')}"/>
 
                         <g:sortableColumn property="ordering"
                                           title="${message(code: 'category.ordering.label', default: 'Ordering')}"/>
@@ -76,14 +76,17 @@
                                 </g:link>
                             </td>
 
-                            <td><g:link action="show"
-                                        id="${categoryInstance.id}">${fieldValue(bean: categoryInstance, field: "parent")}</g:link></td>
+                            <td>
+                                <g:link controller="category" action="show" id="${categoryInstance?.parent?.id}">
+                                    ${fieldValue(bean: categoryInstance, field: "parent.name")}
+                                </g:link>
+                            </td>
 
-                            <td><g:formatDate date="${categoryInstance.dateCreated}"/></td>
+                            <td><g:formatDate date="${categoryInstance.dateCreated}" format="dd/MM/yyyy hh:mm"/></td>
+
+                            <td><g:formatDate date="${categoryInstance.lastUpdated}" format="dd/MM/yyyy hh:mm"/></td>
 
                             <td>${fieldValue(bean: categoryInstance, field: "description")}</td>
-
-                            <td><g:formatDate date="${categoryInstance.lastUpdated}"/></td>
 
                             <td>${fieldValue(bean: categoryInstance, field: "ordering")}</td>
 
