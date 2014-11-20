@@ -1,4 +1,4 @@
-<%@ page import="com.swap.utils.ItemUtils" %>
+<%@ page import="com.swapper.util.ItemUtils" %>
 <g:javascript>
     $(".numberField").numeric({ negative: false });
 </g:javascript>

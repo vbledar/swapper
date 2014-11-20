@@ -1,4 +1,4 @@
-<%@ page import="com.swap.utils.ItemUtils" %>
+<%@ page import="com.swapper.util.ItemUtils" %>
 <div class="criterio col-sm-10">
 	<div class="title">
         <g:message code="search.criteria.upload.date" default="Upload Date"/></div>

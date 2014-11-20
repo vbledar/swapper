@@ -45,7 +45,7 @@
 });
 </g:javascript>
 
-<g:form method="get" name="searchCriteriaForm" class="categorySearch" params="[maincat: maincat ,subcat: subcat]">
+<g:form controller="category" action="items" method="get" name="searchCriteriaForm" class="categorySearch" params="[maincat: maincat ,subcat: subcat]">
     <g:hiddenField name="offset" value="0" />
     <g:hiddenField name="searchTerm" value="${searchTerm}"/>
     <g:hiddenField name="maincat" value="${maincat}"/>

@@ -365,8 +365,9 @@ class ItemService {
         }
 
         if(criteria?.size() > 0){
+            sb.append (" INNER JOIN itm.quantities as quantity")
             criteria.eachWithIndex {k, v, idx ->
-                sb.append(" INNER JOIN itm.attributes as attr${idx+1} ")
+                sb.append(" INNER JOIN quantity.attributes as attr${idx+1} ")
             }
         }
 
