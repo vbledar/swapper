@@ -7,7 +7,6 @@
 * You're free to add application-wide styles to this file and they'll appear at the top of the
 * compiled file, but it's generally better to create a new file per style scope.
 *
-*= require main
 *= require mobile
 *= require_self
 *= require bootstrap
@@ -32,10 +31,12 @@ body {
     width: 80% !important;
     min-width: 80% !important;
     max-width: 80% !important;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .internal_container {
-    max-width: 1024px;
+    /*max-width: 1024px;*/
     margin-left: auto;
     margin-right: auto;
 }

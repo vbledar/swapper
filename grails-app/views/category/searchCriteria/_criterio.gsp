@@ -1,47 +1,92 @@
 <%@ page import="com.swapper.util.ItemUtils" %>
-<div class="criterio col-sm-10">
-	<div class="title">
-        <g:message code="criterio.name.${criterio?.description?.replace(' ', '.')?.toLowerCase()}" default="${criterio?.shortDescription}"/></div>
-	<div class= "divider"></div>  
 
-	<g:if test="${criterio.instanceOf(com.swapper.item.criteria.ListSearchCriteria)}">
-	    <g:if test="${criterio.searchCriteriaAttributes.size() > 10}">
-	        <g:each in="${criterio.searchCriteriaAttributes}" var="attr">
-	            <div class="two-column-aligned">
-                    <g:set var="cr" value="listcriteria.${criterio.id}_${attr.id}_${attr.descr}"/>
-	                <g:checkBox name="${cr}" checked='${ItemUtils.isCriteriaSelected(params,cr,['on'])?'true':null}'/>  <g:message code="criterio.attribute.${attr?.descr?.replace(' ', '.')?.toLowerCase()}" default="${attr?.descr}"/>
-	            </div>
-	        </g:each>
-	    </g:if>
-	    <g:else>
-	        <g:each in="${criterio.searchCriteriaAttributes}" var="attr">
-	            <div>
-                    <g:set var="cr" value="listcriteria.${criterio.id}_${attr.id}_${attr.descr}"/>
-	                <g:checkBox name="${cr}" checked='${ItemUtils.isCriteriaSelected(params,cr,['on'])?'true':null}'/>  <g:message code="criterio.attribute.${attr?.descr?.replace(' ', '.')?.toLowerCase()}" default="${attr?.descr}"/>
-	            </div>
-	        </g:each>
-	    </g:else>
-	</g:if>
-	<g:elseif test="${criterio.instanceOf(com.swapper.item.criteria.RangeSearchCriteria)}">
-	    <div style="overflow: auto; height: 200px">
-            <g:set var="stp" value="${1/criterio.step}" />
-	        <g:each in="${(criterio.min*stp..criterio.max*stp)*.div(stp)}" var="attr">
-	            <div>
-	                <g:set var="attr_val" value="${Double.valueOf(attr).doubleValue()}" />
-                    <g:set var="cr" value="rangecriteria.${criterio.id}_${attr_val}"/>
-	                <g:checkBox name="${cr}" checked='${ItemUtils.isCriteriaSelected(params,cr,['on'])?'true':null}'/> ${attr_val}
-	            </div>
-	        </g:each>
-	    </div>
-	</g:elseif>
-    <g:elseif test="${criterio.instanceOf(com.swapper.item.criteria.BooleanSearchCriteria)}">
-        <div>
-            <g:set var="cr" value="booleancriteria.${criterio.id}"/>
-            <g:radio name="${cr}" value="true" checked='${ItemUtils.isCriteriaSelected(params, cr,['true'])?'true':null}'  /> <g:message code="search.criteria.yes" default="Yes"/>
-            <br/>
-            <g:radio name="${cr}" value="false" checked='${ItemUtils.isCriteriaSelected(params, cr,['false'])?'true':null}'  /> <g:message code="search.criteria.no" default="No"/>
-            <br/>
-            <g:radio name="${cr}" value="any" checked='${ItemUtils.isCriteriaSelected(params, cr,['any', '', null])?'true':null}'  /> <g:message code="search.criteria.any" default="Any"/>
-        </div>
-    </g:elseif>
+<h5>
+    <strong>
+        ${criterio.shortDescription}
+    </strong>
+</h5>
+
+<div class="hidden-xs hidden-sm">
+<g:if test="${criterio.instanceOf(com.swapper.item.criteria.ListSearchCriteria)}">
+    <div class="btn-group btn-group-justified flat-btn-group" data-toggle="buttons">
+        <g:each in="${criterio.searchCriteriaAttributes}" var="attribute">
+            <g:set var="cr" value="listcriteria.${criterio.id}_${attribute.id}_${attribute.descr}"/>
+            <label class="btn btn-primary ${ItemUtils.isCriteriaSelected(params,cr,['on'])?'active':null}">
+                ${attribute.descr}
+                <g:checkBox name="${cr}" checked='${ItemUtils.isCriteriaSelected(params,cr,['on'])?'true':null}'/>
+            </label>
+        </g:each>
+    </div>
+</g:if>
+<g:elseif test="${criterio.instanceOf(com.swapper.item.criteria.RangeSearchCriteria)}">
+    <g:set var="stp" value="${1/criterio.step}" />
+    <div class="btn-group btn-group-justified flat-btn-group" data-toggle="buttons">
+        <g:each in="${(criterio.min*stp..criterio.max*stp)*.div(stp)}" var="attribute">
+            <g:set var="attr_val" value="${Double.valueOf(attribute).doubleValue()}" />
+            <label class="btn btn-primary ${ItemUtils.isCriteriaSelected(params,cr,['on'])?'active':null}">
+                ${attr_val}
+                <g:checkBox name="rangecriteria.${criterio.id}_${attr_val}" checked='${ItemUtils.isCriteriaSelected(params,cr,['on'])?'true':null}'/>
+            </label>
+        </g:each>
+    </div>
+</g:elseif>
+<g:elseif test="${criterio.instanceOf(com.swapper.item.criteria.BooleanSearchCriteria)}">
+    <div class="btn-group flat-btn-group" data-toggle="buttons">
+        <g:set var="cr" value="booleancriteria.${criterio.id}"/>
+        <label class="btn btn-primary ${ItemUtils.isCriteriaSelected(params,cr,['on'])?'active':null}">
+            <g:message code="${com.swapper.enums.general.YesNoType.YES.i18nCode}"/>
+            <g:radio name="${cr}" value="true" checked='${ItemUtils.isCriteriaSelected(params,cr,['true'])?'true':null}'/>
+        </label>
+        <label class="btn btn-primary ${ItemUtils.isCriteriaSelected(params,cr,['on'])?'active':null}">
+            <g:message code="${com.swapper.enums.general.YesNoType.NO.i18nCode}"/>
+            <g:radio name="${cr}" value="false" checked='${ItemUtils.isCriteriaSelected(params,cr,['false'])?'true':null}'/>
+        </label>
+        <label class="btn btn-primary ${ItemUtils.isCriteriaSelected(params,cr,['on'])?'active':null}">
+            <g:message code="search.criteria.any"/>
+            <g:radio name="${cr}" value="any" checked='${ItemUtils.isCriteriaSelected(params,cr,['any'])?'true':null}'/>
+        </label>
+    </div>
+</g:elseif>
+</div>
+<div class="visible-xs visible-sm">
+<g:if test="${criterio.instanceOf(com.swapper.item.criteria.ListSearchCriteria)}">
+    <div class="btn-group flat-btn-group" data-toggle="buttons">
+        <g:each in="${criterio.searchCriteriaAttributes}" var="attribute">
+            <g:set var="cr" value="listcriteria.${criterio.id}_${attribute.id}_${attribute.descr}"/>
+            <label class="btn btn-primary ${ItemUtils.isCriteriaSelected(params,cr,['on'])?'active':null}">
+                ${attribute.descr}
+                <g:checkBox name="${cr}" checked='${ItemUtils.isCriteriaSelected(params,cr,['on'])?'true':null}'/>
+            </label>
+        </g:each>
+    </div>
+</g:if>
+<g:elseif test="${criterio.instanceOf(com.swapper.item.criteria.RangeSearchCriteria)}">
+    <g:set var="stp" value="${1/criterio.step}" />
+    <div class="btn-group flat-btn-group" data-toggle="buttons">
+        <g:each in="${(criterio.min*stp..criterio.max*stp)*.div(stp)}" var="attribute">
+            <g:set var="attr_val" value="${Double.valueOf(attribute).doubleValue()}" />
+            <label class="btn btn-primary ${ItemUtils.isCriteriaSelected(params,cr,['on'])?'active':null}">
+                ${attr_val}
+                <g:checkBox name="rangecriteria.${criterio.id}_${attr_val}" checked='${ItemUtils.isCriteriaSelected(params,cr,['on'])?'true':null}'/>
+            </label>
+        </g:each>
+    </div>
+</g:elseif>
+<g:elseif test="${criterio.instanceOf(com.swapper.item.criteria.BooleanSearchCriteria)}">
+    <div class="btn-group flat-btn-group" data-toggle="buttons">
+        <g:set var="cr" value="booleancriteria.${criterio.id}"/>
+        <label class="btn btn-primary ${ItemUtils.isCriteriaSelected(params,cr,['on'])?'active':null}">
+            <g:message code="${com.swapper.enums.general.YesNoType.YES.i18nCode}"/>
+            <g:radio name="${cr}" value="true" checked='${ItemUtils.isCriteriaSelected(params,cr,['true'])?'true':null}'/>
+        </label>
+        <label class="btn btn-primary ${ItemUtils.isCriteriaSelected(params,cr,['on'])?'active':null}">
+            <g:message code="${com.swapper.enums.general.YesNoType.NO.i18nCode}"/>
+            <g:radio name="${cr}" value="false" checked='${ItemUtils.isCriteriaSelected(params,cr,['false'])?'true':null}'/>
+        </label>
+        <label class="btn btn-primary ${ItemUtils.isCriteriaSelected(params,cr,['on'])?'active':null}">
+            <g:message code="search.criteria.any"/>
+            <g:radio name="${cr}" value="any" checked='${ItemUtils.isCriteriaSelected(params,cr,['any'])?'true':null}'/>
+        </label>
+    </div>
+</g:elseif>
 </div>

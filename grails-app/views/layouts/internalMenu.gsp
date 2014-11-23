@@ -16,5 +16,7 @@
         <div class="spacer10"></div>
     </g:if>
 
-    <g:layoutBody/>
+    <div class="container_80">
+        <g:layoutBody/>
+    </div>
 </g:applyLayout>
