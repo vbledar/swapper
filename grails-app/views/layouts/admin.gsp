@@ -130,6 +130,19 @@
     </div>
 </nav>
 
+<g:if test="${flash.message}">
+    <div class="spacer10"></div>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="alert alert-success" role="status">${flash.message}</div>
+            </div>
+        </div>
+    </div>
+    <div class="spacer10"></div>
+</g:if>
+
 <div class="container-fluid" style="margin-left: auto; margin-right: auto; width: 95%">
     <div class="panel panel-default" style="padding-bottom: 10px;">
         <div class="panel-heading"><g:pageProperty name="page.title" /></div>

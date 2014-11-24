@@ -9,7 +9,7 @@ import grails.transaction.Transactional
 @Transactional(readOnly = true)
 class CategoryController extends BaseController {
 
-    static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
+//    static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
     def categoryService
     def itemService
@@ -51,19 +51,15 @@ class CategoryController extends BaseController {
         params.max = Math.min(max ?: 10, 100)
         def categoryInstanceList = Category.list(params)
         def categoryInstanceCount = Category.count()
-//        respond Category.list(params), model:[categoryInstanceCount: Category.count()]
-
         render (view: "/admin/category/index", model: [categoryInstanceList: categoryInstanceList, categoryInstanceCount: categoryInstanceCount])
     }
 
     def show(Category categoryInstance) {
         render (view: "/admin/category/show", model: [categoryInstance: categoryInstance])
-//        respond categoryInstance
     }
 
     def create() {
         render (view: "/admin/category/create", model: [categoryInstance: new Category(params)])
-//        respond new Category(params)
     }
 
     @Transactional
@@ -75,24 +71,17 @@ class CategoryController extends BaseController {
 
         if (categoryInstance.hasErrors()) {
             render (view: "/admin/category/create", model: [categoryInstance: categoryInstance])
-//            respond categoryInstance.errors, view:'create'
             return
         }
 
         categoryInstance.save flush:true
 
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.created.message', args: [message(code: 'category.label', default: 'Category'), categoryInstance.id])
-                redirect categoryInstance
-            }
-            '*' { respond categoryInstance, [status: CREATED] }
-        }
+        flash.message = message(code: 'default.created.message', args: [message(code: 'category.label', default: 'Category'), categoryInstance.name])
+        render(view: "index")
     }
 
     def edit(Category categoryInstance) {
-        render (view: "/admin/category/create", model: [categoryInstance: categoryInstance])
-//        respond categoryInstance
+        render (view: "/admin/category/edit", model: [categoryInstance: categoryInstance])
     }
 
     @Transactional
@@ -102,21 +91,16 @@ class CategoryController extends BaseController {
             return
         }
 
+
         if (categoryInstance.hasErrors()) {
-            render (view: "/admin/category/edit", model: [categoryInstance: categoryInstance])
-//            respond categoryInstance.errors, view:'edit'
+            render(view: "/admin/category/edit", model: [categoryInstance: categoryInstance])
             return
         }
 
-        categoryInstance.save flush:true
+        categoryInstance.save flush: true
 
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.updated.message', args: [message(code: 'Category.label', default: 'Category'), categoryInstance.id])
-                redirect categoryInstance
-            }
-            '*'{ respond categoryInstance, [status: OK] }
-        }
+        flash.message = message(code: 'default.updated.message', args: [message(code: 'category.label', default: 'Category'), category.name])
+        render (view: "/admin/category/show", model: [categoryInstance: categoryInstance])
     }
 
     @Transactional
@@ -128,23 +112,13 @@ class CategoryController extends BaseController {
         }
 
         categoryInstance.delete flush:true
-
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.deleted.message', args: [message(code: 'Category.label', default: 'Category'), categoryInstance.id])
-                redirect action:"index", method:"GET"
-            }
-            '*'{ render status: NO_CONTENT }
-        }
+        flash.message = message(code: 'default.deleted.message', args: [message(code: 'Category.label', default: 'Category'), categoryInstance.id])
+        redirect(controller: "category", action: "index")
     }
 
     protected void notFound() {
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.not.found.message', args: [message(code: 'category.label', default: 'Category'), params.id])
-                redirect action: "index", method: "GET"
-            }
-            '*'{ render status: NOT_FOUND }
-        }
+        flash.message = message(code: 'default.not.found.message', args: [message(code: 'category.label', default: 'Category'), params.id])
+        redirect(controller: "category", action: "index")
+        return
     }
 }

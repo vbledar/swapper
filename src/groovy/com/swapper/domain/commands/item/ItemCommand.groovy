@@ -35,6 +35,7 @@ class ItemCommand extends BaseCommand {
 
     static constraints = {
         importFrom Item
+        id nullable: true
     }
 
     Long getAttributeIfSelected(Long id) {

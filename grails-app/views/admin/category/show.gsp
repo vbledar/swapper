@@ -15,19 +15,13 @@
         <span class="pull-right">
             <div class="btn-group" role="group" aria-label="Choose">
                 <g:link controller="category" action="index" class="btn btn-primary">
-                    <g:message code="default.home.label"/>
-                </g:link>
-                <g:link controller="category" action="create" class="btn btn-primary">
-                    <g:message code="default.new.label" args="[entityName]"/>
-                </g:link>
-                <g:link controller="category" action="index" class="btn btn-primary">
-                    <g:message code="button.label.cancel"/>
+                    <span class="glyphicon glyphicon-home"></span> <g:message code="default.home.label"/>
                 </g:link>
                 <g:link controller="category" action="edit" id="${categoryInstance.id}" class="btn btn-primary">
-                    <g:message code="default.edit.label" args="[entityName]"/>
+                    <span class="glyphicon glyphicon-pencil"></span> <g:message code="default.edit.label" args="[entityName]"/>
                 </g:link>
                 <g:link controller="category" action="delete" id="${categoryInstance.id}" class="btn btn-danger">
-                    <g:message code="default.delete.label" default="Delete"/>
+                    <span class="glyphicon glyphicon-remove"></span> <g:message code="default.delete.label" default="Delete"/>
                 </g:link>
             </div>
         </span>
@@ -57,7 +51,7 @@
                         <ii:informationLabel label="${message (code: "category.name.label", default: "Name")}" value="${categoryInstance?.name}"/>
 
                         <g:if test="${categoryInstance.parent}">
-                            <ii:informationLabel label="${message (code: "category.parent.label", default: "Parent")}" value="${categoryInstance?.parent?.encodeAsHTML()}"/>
+                            <ii:informationLabel label="${message (code: "category.parent.label", default: "Parent")}" value="${categoryInstance?.parent?.name}"/>
                         </g:if>
                         <g:else>
                             <ii:informationLabel label="${message (code: "category.parent.label", default: "Parent")}" value="None"/>

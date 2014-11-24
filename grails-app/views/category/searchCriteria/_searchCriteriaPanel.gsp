@@ -17,20 +17,19 @@
             <g:hiddenField name="subcat" value="${subcat}"/>
 
             <div class="row">
-                <div class="col-sm-3 col-md-2">
+                <div class="col-xs-12 col-sm-6 col-md-3">
                     <g:render template="/category/searchCriteria/swapBuy" />
                 </div>
-                <div class="col-sm-3 col-md-2">
+                <div class="col-xs-12 col-sm-6 col-md-3">
                     <g:render template="/category/searchCriteria/conditionState" />
                 </div>
-                <div class="col-sm-3 col-md-2">
+                <div class="col-xs-12 col-sm-6 col-md-3">
                     <g:render template="/category/searchCriteria/priceRangeFrom"/>
-                </div>
-                <div class="col-sm-3 col-md-2">
                     <g:render template="/category/searchCriteria/priceRangeTo"/>
                 </div>
-                <div class="col-sm-3 col-md-2">
+                <div class="col-xs-12 col-sm-6 col-md-3">
                     <g:render template="/category/searchCriteria/dateOrderCriteria"/>
+                </div>
             </div>
 
             <g:each in="${searchCriteria}" var="criterio">
@@ -38,6 +37,8 @@
                     <g:render template="/category/searchCriteria/criterio" model="[criterio: criterio]" />
                 </div>
             </g:each>
+
+            <div class="spacer10"></div>
 
             <div class="col-sm-12">
                 <g:submitButton name="search" value="Search" class="btn btn-primary pull-right">

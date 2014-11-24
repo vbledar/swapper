@@ -29,12 +29,12 @@
     <g:textField name="description" class="form-control" required="" value="${categoryInstance?.description}"/>
 </blockquote>
 
-<blockquote class="${hasErrors(bean: categoryInstance, field: 'description', 'has-error')}">
+<blockquote class="${hasErrors(bean: categoryInstance, field: 'ordering', 'has-error')}">
     <label class="text-muted">
         <g:message code="category.ordering.label"  default="Ordering"/>
         <span class="required-indicator">*</span>
     </label>
-    <g:textField name="description" type="number" class="form-control" required="" value="${categoryInstance?.ordering}"/>
+    <g:textField name="ordering" type="number" class="form-control" required="" value="${categoryInstance?.ordering}"/>
 </blockquote>
 
 <blockquote>

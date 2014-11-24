@@ -16,11 +16,8 @@
         <g:message code="default.list.label" args="[entityName]"/>
         <span class="pull-right">
             <div class="btn-group" role="group" aria-label="Choose">
-                <g:link controller="category" action="index" class="btn btn-primary">
-                    <g:message code="default.home.label"/>
-                </g:link>
                 <g:link controller="category" action="create" class="btn btn-primary">
-                    <g:message code="default.new.label" args="[entityName]"/>
+                    <span class="glyphicon glyphicon-plus-sign"></span> <g:message code="default.new.label" args="[entityName]"/>
                 </g:link>
             </div>
         </span>
@@ -63,6 +60,9 @@
 
                         <g:sortableColumn property="ordering"
                                           title="${message(code: 'category.ordering.label', default: 'Ordering')}"/>
+                        <th class="text-right">
+                            <g:message code="action.column.available.actions" default="Available Actions"/>
+                        </th>
 
                     </tr>
                     </thead>
@@ -90,6 +90,24 @@
 
                             <td>${fieldValue(bean: categoryInstance, field: "ordering")}</td>
 
+                            <td>
+                                <div class="btn-group pull-right">
+                                    <g:link controller="category" action="show" id="${categoryInstance.id}" class="btn btn-primary">
+                                        <span class="glyphicon glyphicon-eye-open"></span>
+                                    </g:link>
+                                    <g:link controller="category" action="edit" id="${categoryInstance.id}" class="btn btn-primary">
+                                        <span class="glyphicon glyphicon-pencil"></span>
+                                    </g:link>
+                                    <g:if test="${categoryInstance.parent}">
+                                        <g:link controller="searchCriteria" action="index" id="${categoryInstance.id}" class="btn btn-primary">
+                                            <span class="glyphicon glyphicon glyphicon-th"></span>
+                                        </g:link>
+                                    </g:if>
+                                    <g:link controller="category" action="show" id="${categoryInstance.id}" class="btn btn-danger">
+                                        <span class="glyphicon glyphicon-remove"></span>
+                                    </g:link>
+                                </div>
+                            </td>
                         </tr>
                     </g:each>
                     </tbody>

@@ -26,17 +26,6 @@
 <content tag="content">
     <div id="list-category" class="content scaffold-list" role="main">
 
-        <g:if test="${flash.message}">
-            <div class="spacer10"></div>
-            <div class="row">
-                <div class="col-sm-12">
-                    <div class="message" role="status">${flash.message}</div>
-                </div>
-            </div>
-        </g:if>
-
-        <div class="spacer10"></div>
-
         <div class=row">
             <div class="col-sm-12">
 
