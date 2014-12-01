@@ -77,7 +77,6 @@
               keys="${com.swapper.enums.item.ItemConditionType.values()*.name()}"
               required=""
               value="${item?.itemConditionType?.name()}"
-              noSelection="['':message(code: 'form.field.input.condition.type')]"
               class="many-to-one form-control" />
     </div>
 </blockquote>
@@ -90,7 +89,6 @@
               from="${com.swapper.enums.item.ItemExchangeType.values()*.description}"
               keys="${com.swapper.enums.item.ItemExchangeType.values()*.name()}"
               required=""
-              noSelection="['':message(code: 'form.field.input.exchange.type')]"
               value="${ item?.itemExchangeType?.name() }"
               class="many-to-one form-control"/>
     </div>
