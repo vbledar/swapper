@@ -27,6 +27,14 @@
 
         <div class="spacer30"></div>
 
+        <g:if test="${errorMessage}">
+            error exists
+            <div class="spacer30"></div>
+            <div class="internal_container">
+                <g:render template="/standard/userInformation/userErrorMessage"/>
+            </div>
+        </g:if>
+
         <g:if test="${showPaymentMethodRequiredMessage}">
             <div class="spacer30"></div>
             <div class="internal_container">

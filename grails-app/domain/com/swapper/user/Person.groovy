@@ -46,7 +46,7 @@ class Person extends BaseRecord {
 
         qualityUser nullable: false
 
-        wallet nullable: false
+        wallet nullable: true
 
         addresses nullable: true
         paymentMethods nullable: true

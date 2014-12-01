@@ -23,6 +23,7 @@
             </div>
         </div>
 
+
         <g:each in="${items}" var="item">
             <g:render template="/item/itemInListView" model="[item: item]"/>
         </g:each>

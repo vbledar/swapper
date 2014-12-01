@@ -140,6 +140,54 @@ environments {
             action = "ipn/ipnDevelopmentListener.jsp"
         }
     }
+    test {
+        grails.serverURL = "http://109.74.203.247:8181/swapper"
+
+        grails.logging.jul.usebridge = true
+
+        // oauth 2.0 configuration for different social networks
+        oauth {
+            providers {
+                facebook {                                          // facebook provider configuration
+                    api     = FacebookApi                           // already implemented provider for facebook
+                    key     = "1478488675709179"                    // app id which is provided by facebook
+                    secret  = "c54c2cf7567df0b7d773ebef09a9b324"    // app secret which is provided by facebook
+
+                    scope   = "email"
+
+                    successUri  = 'http://109.74.203.247:8181/swapper/socialManager/facebookSuccessHandler'
+                    failureUri  = 'http://109.74.203.247:8181/swapper/socialManager/facebookFailureHandler'
+
+                    callback    = "http://109.74.203.247:8181/swapper/oauth/facebook/callback"
+
+                    facebookUrl = "https://www.facebook.com/dialog/oauth"
+                    graphApi    = "https://graph.facebook.com"
+                }
+            }
+        }
+
+        paypal {
+            auth = "https://www.sandbox.paypal.com/cgi-bin/webscr"
+            authUrl = "https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_ap-payment&paykey="
+            url = "https://svcs.sandbox.paypal.com"
+            pay = "/AdaptivePayments/Pay"
+            execute = "/AdaptivePayments/ExecutePayment"
+            setpaymentoptions = "/AdaptivePayments/SetPaymentOptions"
+            getpaymentoptions = "/AdaptivePayments/GetPaymentOptions"
+            username = "vbledar-facilitator_api1.gmail.com"
+            password = "1362835487"
+            signature = "AjeR-9SbcdEOuwHETswewMq9.cpHAivzYTEyGR2GkPwthyBX0fJeHpll"
+            application = "APP-80W284485P519543T"
+            email = "vbbuyer0@gmail.com"
+
+            logourl = "http://109.74.203.247:8181/swap/images/static/logo-paypal-header-image.png"
+
+            businessName = "Swappybees"
+
+            ipnurl = "http://www.swappybees.com/"
+            action = "ipn/ipnDevelopmentListener.jsp"
+        }
+    }
     production {
         grails.logging.jul.usebridge = false
         // TODO: grails.serverURL = "http://www.changeme.com"

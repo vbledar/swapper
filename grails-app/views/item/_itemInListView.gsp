@@ -22,12 +22,12 @@
                 <g:each in="${item?.photos}" var="photo" status="i">
                     <g:if test="${i == 0}">
                         <div class="item text-center active">
-                            <sw:photo photo="${photo}" size="z" cssClass="img-thumbnail img-responsive img-rounded image-max-180-180" cssStyle="margin-left: auto; margin-right: auto;"/>
+                            <sw:photo photo="${photo}" size="m" cssClass="img-thumbnail img-responsive img-rounded image-max-180-180" cssStyle="margin-left: auto; margin-right: auto;"/>
                         </div>
                     </g:if>
                     <g:else>
                         <div class="item text-center">
-                            <sw:photo photo="${photo}" size="z" cssClass="img-thumbnail img-responsive img-rounded image-max-180-180" cssStyle="margin-left: auto; margin-right: auto;"/>
+                            <sw:photo photo="${photo}" size="m" cssClass="img-thumbnail img-responsive img-rounded image-max-180-180" cssStyle="margin-left: auto; margin-right: auto;"/>
                         </div>
                     </g:else>
                 </g:each>
@@ -64,7 +64,12 @@
 
         <div class="row">
             <div class="col-sm-12">
-                <g:render template="/item/itemInListViewMenu" model="[item: item]"/>
+                <g:if test="${controllerName.equals("swapShop")}">
+                    <g:render template="/item/menu/itemInListViewMenuOwner" model="[item: item]"/>
+                </g:if>
+                <g:elseif test="${controllerName.equals("category")}">
+                    <g:render template="/item/menu/itemInListViewMenuOther" model="[item: item]"/>
+                </g:elseif>
             </div>
         </div>
     </div>

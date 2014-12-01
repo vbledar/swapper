@@ -11,19 +11,19 @@
         </ul>
         <div class="tab-content">
             <div role="tabpanel" class="tab-pane fade ${ tabSelected ? '' : 'in active'}" id="basicTab">
-                <g:render template="/item/basicInformation" model="[item: item, rootCategories: rootCategories, categories: categories]"/>
+                <g:render template="/item/itemInformationViews/basicInformation" model="[item: item, rootCategories: rootCategories, categories: categories]"/>
             </div>
 
             <div role="tabpanel" class="tab-pane fade ${'details'.equalsIgnoreCase(tabSelected) ? 'in active' : ''}" id="detailsTab">
-                <g:render template="/item/detailedInformation" model="[item: item]"/>
+                <g:render template="/item/itemInformationViews/detailedInformation" model="[item: item]"/>
             </div>
 
             <div role="tabpanel" class="tab-pane fade ${'shipping'.equalsIgnoreCase(tabSelected) ? 'in active' : ''}" id="shippingTab">
-                <g:render template="/item/shippingInformation" model="[item: item]"/>
+                <g:render template="/item/itemInformationViews/shippingInformation" model="[item: item]"/>
             </div>
 
             <div role="tabpanel" class="tab-pane fade ${'photos'.equalsIgnoreCase(tabSelected) ? 'in active' : ''}" id="photosTab">
-                <g:render template="/item/photosInformation" model="[item: item]"/>
+                <g:render template="/item/itemInformationViews/photosInformation" model="[item: item]"/>
             </div>
         </div>
     </div>

@@ -69,6 +69,11 @@ ul.sdt_menu.li{
                                     </span>
                                 </a>
                             </li>
+                            <li class="pull-right">
+                                <g:link controller="swapShop" action="swapShop">
+                                    <g:message code=""
+                                </g:link>
+                            </li>
                         </ul>
                     </li>
                 </ul>
