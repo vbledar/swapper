@@ -12,6 +12,11 @@
                                 </g:link>
                             </li>
                         </g:each>
+                        <li class="pull-right">
+                            <g:link controller="swapShop" action="swapShop">
+                                <g:message code="account.menu.swap.shop"/>
+                            </g:link>
+                        </li>
                     </ul>
                 </li>
             </g:each>
@@ -23,7 +28,7 @@
     <div class="row" style="background-color: #000000">
         <div class="col-xs-12 col-sm-offset-1 col-sm-10 container_80">
             <ul id="sdt_menu" class="sdt_menu">
-                <li>
+                <li class="animation">
                     <a href="#">
                         <g:img dir="images" file="women-hover.png"/>
                         <span class="sdt_active"></span>
@@ -40,7 +45,7 @@
                         </g:each>
                     </div>
                 </li>
-                <li>
+                <li class="animation">
                     <a href="#">
                         <g:img dir="images" file="men-hover.png"/>
                         <span class="sdt_active"></span>
@@ -57,7 +62,7 @@
                         </g:each>
                     </div>
                 </li>
-                <li>
+                <li class="animation">
                     <a href="#">
                         <g:img dir="images" file="kids-hover.png"/>
                         <span class="sdt_active"></span>
@@ -73,6 +78,15 @@
                             </g:link>
                         </g:each>
                     </div>
+                </li>
+                <li class="pull-right">
+                    <g:link controller="swapShop" action="swapShop">
+                        <span class="sdt_wrap">
+                            <span class="sdt_link">
+                                <g:message code="account.menu.swap.shop"/>
+                            </span>
+                        </span>
+                    </g:link>
                 </li>
             </ul>
         </div>
@@ -119,7 +133,7 @@
          * then we slide it - if the element is the last one in the menu
          * we slide it to the left, otherwise to the right
          */
-        $('#sdt_menu > li').bind('mouseenter',function(){
+        $('#sdt_menu > li.animation').bind('mouseenter',function(){
             var $elem = $(this);
             $elem.find('img')
                     .stop(true)

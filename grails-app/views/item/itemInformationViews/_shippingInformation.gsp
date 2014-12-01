@@ -6,7 +6,7 @@
 
 <g:form name="updateItemShippingInformationForm" controller="swapShop" action="updateItemShippingInformation" id="${item?.id}" role="form">
 
-    <g:render template="/item/itemShippingInfoFormFields" model="[item: item, itemShipping: item?.itemShipping]"/>
+    <g:render template="/item/itemForms/itemShippingInfoFormFields" model="[item: item, itemShipping: item?.itemShipping]"/>
 
 </g:form>
 

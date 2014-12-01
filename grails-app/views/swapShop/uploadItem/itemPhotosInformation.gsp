@@ -27,7 +27,7 @@
         </div>
 
         <g:form name='uploadItemForm' controller="swapShop" action="uploadItem" role="form" class="form-horizontal">
-            <g:render template="/item/itemPhotosInfoFormFields" model="[item: item]"/>
+            <g:render template="/item/itemForms/itemPhotosInfoFormFields" model="[item: item]"/>
         </g:form>
     </content>
 

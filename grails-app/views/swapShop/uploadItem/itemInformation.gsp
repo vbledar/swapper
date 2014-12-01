@@ -10,7 +10,7 @@
 
     <content tag="flowStepBody">
         <g:form name='uploadItemForm' controller="swapShop" action="uploadItem" role="form" class="form-horizontal">
-            <g:render template="/item/itemBasicInfoFormFields" model="[itemInstance: itemInstance, hasPaymentMethod: hasPaymentMethod]"/>
+            <g:render template="/item/itemForms/itemBasicInfoFormFields" model="[itemInstance: itemInstance, hasPaymentMethod: hasPaymentMethod]"/>
         </g:form>
     </content>
 

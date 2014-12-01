@@ -30,7 +30,7 @@ class SwapShopController extends BaseController {
     def swapShop() {
         Person person = getLoggedInUserFromDatabase()
         if (!person) {
-            flash.error = message(code: "user.message.no.logged.in.user.found")
+            flash.errorMessage = message(code: "user.message.no.logged.in.user.found")
             redirect(controller: "landing", action: "index")
             return
         }

@@ -1,18 +1,18 @@
 <div class="page-header">
     <h1>
-        <g:message code="item.menu.detailed.information"/>
+        <g:message code="item.management.overview.basic.information.header"/>
     </h1>
 </div>
 
-<g:form name="updateItemDetailedInfoForm" controller="swapShop" action="updateItemDetailedInformation" id="${item?.id}" role="form">
+<g:form name="updateItemBasicInformationForm" controller="swapShop" action="updateItemBasicInformation" id="${item?.id}" role="form">
 
-    <g:render template="/item/itemDetailedInfoFormFields" model="[itemInstance: item, searchCriteria: searchCriteria]"/>
+    <g:render template="/item/itemForms/itemBasicInfoFormFields" model="[item: item]"/>
 
 </g:form>
 
 <div class="row">
     <div class="col-sm-12 text-right">
-        <button id="updateItemDetailedInformation" class="btn btn-primary" form-id="updateItemDetailedInfoForm">
+        <button id="updateItemBasicInformation" class="btn btn-primary" form-id="updateItemBasicInformationForm">
             <span class="glyphicon glyphicon-save"></span> <g:message code="button.label.update"/>
         </button>
     </div>
@@ -22,7 +22,7 @@
 
     $(function() {
 
-        $('#updateItemDetailedInformation').off('click').on('click', function(event) {
+        $('#updateItemBasicInformation').off('click').on('click', function(event) {
             event.preventDefault();
 
             var formId = $(this).attr('form-id');

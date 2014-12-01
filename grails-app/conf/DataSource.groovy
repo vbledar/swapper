@@ -30,7 +30,12 @@ environments {
     test {
         dataSource {
             dbCreate = "update"
-            url = "jdbc:h2:mem:testDb;MVCC=TRUE;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE"
+            driverClassName = "com.mysql.jdbc.Driver"
+            dialect = "org.hibernate.dialect.MySQLDialect"
+            username = "swapper"
+            password = "swapper"
+            url = "jdbc:mysql://localhost/swapper?useUnicode=true&characterEncoding=utf8"
+            logSql = true
         }
     }
     production {

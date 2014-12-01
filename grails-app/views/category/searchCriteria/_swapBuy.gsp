@@ -6,7 +6,7 @@
     </strong>
 </h5>
 
-<div class="btn-group flat-btn-group" data-toggle="buttons">
+<div class="btn-group btn-group-justified flat-btn-group" data-toggle="buttons">
     <label class="btn btn-primary">
         <g:message code="item.exchange.type.swap"/>
         <g:radio name="swapBuyType" value="${com.swapper.enums.item.ItemExchangeType.SWAP}"/>

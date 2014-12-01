@@ -22,7 +22,7 @@
 </div>
 <g:form name="updateItemPhotosInformationForm" controller="swapShop" action="updateItemPhotosInformation" id="${item?.id}" role="form">
 
-    <g:render template="/item/itemPhotosInfoFormFields" model="[item: item]"/>
+    <g:render template="/item/itemForms/itemPhotosInfoFormFields" model="[item: item]"/>
 
 </g:form>
 
