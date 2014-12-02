@@ -30,6 +30,7 @@ abstract class BaseController {
 
     /**
      * Retrieves the logged in user from session.
+     * This instance is not connected to any session.
      *
      * @return the logged in person instance.
      */

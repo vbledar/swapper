@@ -9,6 +9,20 @@ class UserInformationTagLib {
 
     static namespace = "ui"
 
+    def userLoggedIn = { attrs, body ->
+        Person person = session["loggeduser"];
+        if (person) {
+            out << body()
+        }
+    }
+
+    def userNotLoggedIn = { attrs, body ->
+        Person person = session["loggeduser"];
+        if (!person) {
+            out << body()
+        }
+    }
+
     def personAddress = { attrs ->
         Address address = attrs.address
         Boolean showRemove = Boolean.parseBoolean(attrs.showRemove)

@@ -1,6 +1,6 @@
 <div class="btn-group flat-btn-group btn-group-justified">
     <div class="btn-group">
-        <g:link controller="swapShop" action="viewItem" id="${item?.id}" class="btn btn-primary btn-sm">
+        <g:link controller="item" action="viewItem" id="${item?.id}" class="btn btn-primary btn-sm">
             <span class="glyphicon glyphicon-eye-open"></span>
             <span class="hidden-xs">
                 <div class="row">

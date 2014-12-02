@@ -39,7 +39,7 @@
                     </div>
                 </div>
 
-                <g:render template="/item/itemDetailedInfoSummary" model="[item: item, itemShipping: itemShipping]"/>
+                <g:render template="/item/itemCommandDetailedInfoSummary" model="[item: item, itemShipping: itemShipping]"/>
             </div>
         </div>
     </content>

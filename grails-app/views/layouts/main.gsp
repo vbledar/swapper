@@ -42,7 +42,7 @@
             </div>
         </g:if>
 
-        <div class="container-fluid">
+        <div class="container_80">
             <div class="row">
                 <div class="col-sm-12">
                     <g:layoutBody/>
@@ -54,5 +54,8 @@
             <div class="progress-bar progress-bar-striped active"  role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
             </div>
         </div>
+
+        <!-- Go to www.addthis.com/dashboard to customize your tools -->
+        <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-52f8b2a42d320c34" async="async"></script>
 	</body>
 </html>
