@@ -8,7 +8,7 @@ class RequestTxn {
 
     RequestTxnStatusEnum requestTxnStatusEnum = RequestTxnStatusEnum.OPEN
 
-    static belongsTo = [person: Person, item: Item]
+    static belongsTo = [person: Person, item: Item, request: Request]
 
     static constraints = {
         person nullable: false
