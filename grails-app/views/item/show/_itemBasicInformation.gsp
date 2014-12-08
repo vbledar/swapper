@@ -1,13 +1,11 @@
 
 <div class="row">
-    <div class="col-sm-12">
+    <div class="col-sm-12 bottom-shadow-header">
         <h3>
             <g:message code="item.management.overview.basic.information.header"/>
         </h3>
     </div>
 </div>
-
-<div class="divider"></div>
 
 <ii:informationLabel label="${message(code: "form.field.item.status")}" value="${message(code: item?.itemStatusType?.i18nCode)}"/>
 <ii:informationLabel label="${message(code: "form.field.item.condition")}" value="${message(code: item?.itemConditionType?.i18nCode)}"/>

@@ -19,18 +19,23 @@
 
     <div class="internal_container">
 
-        <div class="page-header">
-            <h1>
-                ${item.name}
-                <br />
-                <small>
-                    ${item.description}
-                </small>
-            </h1>
+        <div class="row">
+            <div class="col-xs-12 col-sm-offset-3 col-sm-9 col-md-offset-3 col-md-9 profile-container">
+                <div class="page-header">
+                    <h1>
+                        ${item.name}
+                        <br />
+                        <small>
+                            ${item.description}
+                        </small>
+                        <small class="pull-right" style="color: darkorange"><i><g:message code="swap.shop.item.uploaded.on" args="[formatDate(format: 'dd/MM/yyyy', date: item?.dateCreated)]"/></i></small>
+                    </h1>
+                </div>
+            </div>
         </div>
 
         <div class="row">
-            <div class="col-sm-4 text-center">
+            <div class="col-xs-12 col-sm-3 col-md-3 text-center">
 
                 <g:render template="/item/itemPhotosCarousel" model="[item: item]"/>
 
@@ -78,15 +83,22 @@
                     </div>
                 </ui:userNotLoggedIn>
             </div>
-            <div class="col-sm-8 profile-container">
+            <div class="col-xs-12 col-sm-9 col-md-9 profile-container">
                 <div class="row">
                     <div class="col-sm-12">
                         <g:render template="/item/show/itemBasicInformation" model="[item: item, itemShipping: itemShipping]"/>
                     </div>
                 </div>
+                <g:if test="${item.quantities[0].attributes.size() > 0}">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <g:render template="/item/show/itemDetailedInformation" model="[item: item, itemShipping: itemShipping]"/>
+                        </div>
+                    </div>
+                </g:if>
                 <div class="row">
                     <div class="col-sm-12">
-                        %{--<g:render template="/item/show/itemBasicInformation" model="[item: item]"/>--}%
+                        <g:render template="/item/show/itemShippingInformation" model="[item: item, itemShipping: item.itemShipping]"/>
                     </div>
                 </div>
                 %{--<g:if test="${"address".equalsIgnoreCase(showContent)}">--}%
