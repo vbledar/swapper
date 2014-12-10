@@ -1,17 +1,29 @@
+
+<h4 class="text-center">
+    <g:message code="item.management.overview.photos.header"/>
+</h4>
+
+<g:render template="/item/itemPhotosCarousel" model="[item: item]"/>
+
+<div class="spacer10"></div>
+
 <div class="row">
-    <div class="col-xs-12 col-sm-5 col-md-4">
-        <h3 class="text-center">
-            <g:message code="item.management.overview.photos.header"/>
-        </h3>
-        <g:render template="/item/itemPhotosCarousel" model="[item: item]"/>
-
-        <div class="spacer10"></div>
-        <div class="spacer10"></div>
+    <div class="col-sm-12 thumbnail" style="margin-left: 10px; margin-right: 10px; padding: 10px; border-radius: 0px;">
+        <g:render template="/item/show/itemBasicInformation" model="[item: item, itemShipping: itemShipping]"/>
     </div>
-
-    <div class="col-xs-12 col-sm-5 col-md-5">
-        <g:render template="/item/itemBasicInformationOverview" model="[item: item, itemShipping: item?.itemShipping]"/>
+</div>
+<g:if test="${item.quantities[0].attributes.size() > 0}">
+    <div class="row">
+        <div class="col-sm-12 thumbnail" style="margin-left: 10px; margin-right: 10px; padding: 10px; border-radius: 0px;">
+            <g:render template="/item/show/itemDetailedInformation" model="[item: item, itemShipping: itemShipping]"/>
+        </div>
     </div>
+</g:if>
+<div class="row">
+    <div class="col-sm-12 thumbnail" style="margin-left: 10px; margin-right: 10px; padding: 10px; border-radius: 0px;">
+        <g:render template="/item/show/itemShippingInformation" model="[item: item, itemShipping: item.itemShipping]"/>
+    </div>
+</div>
 
     %{--<div class="col-xs-12 col-sm-2 col-md-3 text-center">--}%
         %{--<div class="col-sm-12">--}%

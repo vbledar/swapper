@@ -18,7 +18,7 @@ class ItemController extends BaseController {
 
         // item belongs to current user so we redirect him to
         // item management page
-        if (item?.person?.socialNetworkId == person?.id) {
+        if (item?.person?.socialNetworkId == person?.socialNetworkId) {
             redirect(controller: "swapShop", action: "viewItem", params: params)
             return
         } else {

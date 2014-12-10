@@ -17,16 +17,8 @@
 
 <body>
 
-<content tag="internalMenu">
-    <div class="row">
-        <div class="col-sm-12 no-padding-no-margin">
-            <g:render template="/standard/swapShopMenu"/>
-        </div>
-    </div>
-</content>
-
-<div class="internal_container">
-    <div class="page-header">
+<content tag="internalMenuHeader">
+    <div class="page-header text-center">
         <h1>
             <g:message code="swap.shop.management.header"/>
             <br />
@@ -35,7 +27,18 @@
             </small>
         </h1>
     </div>
+</content>
 
+<content tag="internalMenu">
+    <div class="row">
+        <div class="col-sm-12 no-padding-no-margin">
+            <g:render template="/standard/swapShopMenu"/>
+        </div>
+    </div>
+</content>
+
+
+<div class="internal_container">
     <div id="swapShopContainer">
         <g:render template="personsSwapShop" model="[items: items, itemsCounted: itemsCounted]"/>
     </div>

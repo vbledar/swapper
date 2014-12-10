@@ -1,12 +1,15 @@
 <%@ page import="com.swapper.enums.item.ItemExchangeType;"%>
 
-<div class="row">
-    <div class="col-sm-12 bottom-shadow-header">
+%{--<div class="row">--}%
+    <div class="col-sm-12 ">
         <h3>
             <g:message code="item.management.shipping.information.header"/>
         </h3>
     </div>
-</div>
+%{--</div>--}%
+
+<div class="divider"></div>
+<div class="spacer10"></div>
 
 <g:if test="${itemShipping.shippingInfo}">
     <ii:informationLabel label="${message(code: "form.field.item.shipping.info")}" value="${itemShipping.shippingInfo}"/>

@@ -4,7 +4,7 @@
     </h1>
 </div>
 
-<div class="alert alert-warning">
+<div class="alert alert-info">
     <h5>
         <g:message code="user.message.image.limitations"/>
     </h5>

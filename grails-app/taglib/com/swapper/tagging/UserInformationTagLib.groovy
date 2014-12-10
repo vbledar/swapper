@@ -27,7 +27,7 @@ class UserInformationTagLib {
         Address address = attrs.address
         Boolean showRemove = Boolean.parseBoolean(attrs.showRemove)
         if (address) {
-            out << "<address class='well well-sm'>"
+            out << "<address class='thumbnail'>"
             out << "<strong>${address?.firstAddress}</strong>"
             if (address?.mainAddress) {
                 out << "<span class='text-muted'>"

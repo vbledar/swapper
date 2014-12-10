@@ -1,12 +1,10 @@
-<div class="col-sm-12">
+<div class="col-xs-12 col-sm-5 col-md-4">
     <g:render template="/item/overview" model="[item: item]"/>
 </div>
 
-<div class="spacer10"></div>
-
-<div class="col-sm-12">
-    <div class="panel panel-default" style="padding: 10px;">
-        <ul class="nav nav-pills nav-justified" role="tablist">
+<div class="col-xs-12 col-sm-7 col-md-8">
+    <div class="" style="padding: 10px;">
+        <ul class="nav nav-tabs nav-justified" role="tablist">
             <g:render template="item/itemMenu" model="[item: item, tabSelected: tabSelected]"/>
         </ul>
         <div class="tab-content">

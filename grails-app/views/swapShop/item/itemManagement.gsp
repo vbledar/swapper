@@ -17,15 +17,8 @@
 
 <body>
 
-<content tag="internalMenu">
-    <div class="row">
-        <div class="col-sm-12 no-padding-no-margin">
-            <g:render template="/standard/swapShopMenu"/>
-        </div>
-    </div>
-</content>
+<content tag="internalMenuHeader">
 
-<div class="internal_container">
     <div class="page-header text-center">
         <h1>
             <g:message code="item.management.header"/>
@@ -36,7 +29,18 @@
         </h1>
     </div>
 
-    <div class="spacer30"></div>
+</content>
+
+<content tag="internalMenu">
+    <div class="row">
+        <div class="col-sm-12 no-padding-no-margin">
+            <g:render template="/standard/swapShopMenu"/>
+        </div>
+    </div>
+</content>
+
+<div class="internal_container">
+
 
     <div class="row">
         <div class="col-sm-12">
@@ -44,12 +48,13 @@
                 <h1>
                     ${item?.name}
                     <small style="color: darkorange">
+                        <div class="visible-xs visible-sm hidden-md"><br></div>
                         <i>
                             <g:message code="swap.shop.item.uploaded.on" args="[formatDate(format: 'dd/MM/yyyy', date: item?.dateCreated)]"/>
                         </i>
                     </small>
                     <span class="pull-right">
-                        <div class="visible-xs">
+                        <div class="visible-xs visible-sm">
                             <br>
                         </div>
                         <button class="btn btn-danger">

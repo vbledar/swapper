@@ -12,14 +12,14 @@
                                 </g:link>
                             </li>
                         </g:each>
-                        <li class="pull-right">
-                            <g:link controller="swapShop" action="swapShop">
-                                <g:message code="account.menu.swap.shop"/>
-                            </g:link>
-                        </li>
                     </ul>
                 </li>
             </g:each>
+            <li>
+                <g:link controller="swapShop" action="swapShop">
+                    <g:message code="account.menu.swap.shop"/>
+                </g:link>
+            </li>
         </ul>
     </div>
 </nav>

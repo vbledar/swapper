@@ -8,6 +8,10 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <g:applyLayout name="main">
 
+    <g:if test="${pageProperty(name: "page.internalMenuHeader")}">
+        <g:pageProperty name="page.internalMenuHeader"/>
+    </g:if>
+
     <g:if test="${pageProperty(name: "page.internalMenu")}">
         <div class="container_80" style="margin-right: auto; margin-left: auto;">
             <g:pageProperty name="page.internalMenu"/>

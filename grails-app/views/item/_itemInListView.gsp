@@ -22,12 +22,12 @@
                 <g:each in="${item?.photos}" var="photo" status="i">
                     <g:if test="${i == 0}">
                         <div class="item text-center active">
-                            <sw:photo photo="${photo}" size="m" cssClass="img-thumbnail img-responsive img-rounded image-max-180-180" cssStyle="margin-left: auto; margin-right: auto;"/>
+                            <sw:photo photo="${photo}" size="m" cssClass="img-thumbnail img-responsive img-rounded " cssStyle="margin-left: auto; margin-right: auto;"/>
                         </div>
                     </g:if>
                     <g:else>
                         <div class="item text-center">
-                            <sw:photo photo="${photo}" size="m" cssClass="img-thumbnail img-responsive img-rounded image-max-180-180" cssStyle="margin-left: auto; margin-right: auto;"/>
+                            <sw:photo photo="${photo}" size="m" cssClass="img-thumbnail img-responsive img-rounded " cssStyle="margin-left: auto; margin-right: auto;"/>
                         </div>
                     </g:else>
                 </g:each>

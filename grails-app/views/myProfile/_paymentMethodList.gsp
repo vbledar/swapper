@@ -1,5 +1,5 @@
 <g:each in="${paymentMethods}" var="paymentMethod">
-    <div class="well well-sm">
+    <div class="thumbnail">
         <g:if test="${paymentMethod?.mainPaymentMethod}">
             <span class="text-muted">
                 <g:message code="profile.management.user.main.payment.method"/>

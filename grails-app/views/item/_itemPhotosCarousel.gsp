@@ -5,10 +5,10 @@
             <div class="item text-center ${i == 0 ? 'active' : ''}">
                 <a class="image-photo-gallery" href="${photo?.url}">
                     <g:if test="${photo instanceof com.swapper.multimedia.photo.Photo}">
-                        <sw:photo photo="${photo}" size="z" cssClass="img-thumbnail img-responsive img-rounded image-max-180-180" cssStyle="margin-left: auto; margin-right: auto;"/>
+                        <sw:photo photo="${photo}" size="m" cssClass="img-thumbnail img-responsive img-rounded image-max-180-180" cssStyle="margin-left: auto; margin-right: auto;"/>
                     </g:if>
                     <g:elseif test="${photo instanceof com.swapper.domain.multimedia.photo.ItemPhotoCommand}">
-                        <sw:photoCommand photo="${photo}" size="z" cssClass="img-thumbnail img-responsive img-rounded image-max-180-180" cssStyle="margin-left: auto; margin-right: auto;"/>
+                        <sw:photoCommand photo="${photo}" size="m" cssClass="img-thumbnail img-responsive img-rounded image-max-180-180" cssStyle="margin-left: auto; margin-right: auto;"/>
                     </g:elseif>
                 </a>
             </div>

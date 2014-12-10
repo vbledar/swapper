@@ -17,6 +17,18 @@
 
 <body>
 
+<content tag="internalMenuHeader">
+    <div class="page-header text-center">
+        <h1>
+            <g:message code="wallet.management.header"/>
+            <br />
+            <small>
+                <g:message code="wallet.management.sub.header"/>
+            </small>
+        </h1>
+    </div>
+</content>
+
 <content tag="internalMenu">
     <div class="row">
         <div class="col-sm-12 no-padding-no-margin flat-btn-group">
@@ -26,16 +38,6 @@
 </content>
 
 <div class="internal_container">
-    <div class="page-header">
-        <h1>
-            <g:message code="wallet.management.header"/>
-            <br />
-            <small>
-                <g:message code="wallet.management.sub.header"/>
-            </small>
-        </h1>
-    </div>
-
     <div id="topUpAccountContainer">
         <g:render template="personsWallet" model="[wallet: wallet]"/>
     </div>

@@ -18,6 +18,18 @@
 
 <body>
 
+<content tag="internalMenuHeader">
+    <div class="page-header text-center">
+        <h1>
+            <g:message code="profile.management.header"/>
+            <br />
+            <small>
+                <g:message code="profile.management.sub.header"/>
+            </small>
+        </h1>
+    </div>
+</content>
+
 <content tag="internalMenu">
     <div class="row">
         <div class="col-sm-12 no-padding-no-margin flat-btn-group">
@@ -30,16 +42,6 @@
 <g:set var="socialNetworkType" value="${message(code: person?.socialNetworkType?.getI18nDescriptive())}"/>
 
 <div class="internal_container">
-    <div class="page-header">
-        <h1>
-            <g:message code="profile.management.header"/>
-            <br />
-            <small>
-                <g:message code="profile.management.sub.header"/>
-            </small>
-        </h1>
-    </div>
-
 
     <div class="row">
         <div class="col-sm-3 text-center">
